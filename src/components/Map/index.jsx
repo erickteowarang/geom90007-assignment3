@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import * as cafeData from "../../data/cafe-restaurant-bistro-seats-2019.json";
+import * as cafeData from "../../data/cafe-restuarants-2019.json";
 
 const Map = () => {
   const [viewport, setViewport] = useState({
@@ -25,9 +25,9 @@ const Map = () => {
       >
         {cafeData.features.map((cafe) => (
           <Marker
-            key={cafeData.features["Base property ID"]}
-            latitude={cafeData.features.latitude}
-            longitude={cafeData.features.longitude}
+            key={cafe.ID}
+            latitude={cafe.latitude}
+            longitude={cafe.longitude}
           >
             <div>TEST</div>
           </Marker>
