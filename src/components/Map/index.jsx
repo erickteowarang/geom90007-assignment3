@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
+import React, { useRef, useState, useEffect } from "react";
+import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
+import "./Map.css";
 
 const Map = () => {
   const [viewport, setViewport] = useState({
@@ -10,6 +11,21 @@ const Map = () => {
     longitude: 144.96,
     zoom: 14,
   });
+
+  const [selectedCafe, setSelectedCafe] = useState(null);
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === "Escape") {
+        setSelectedCafe(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
+
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
 
   const accessToken =
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
@@ -39,11 +55,11 @@ const Map = () => {
     : null;
 
   // Get Clusters
-  const { clusters } = useSupercluster({
+  const { clusters, supercluster } = useSupercluster({
     points,
     zoom: viewport.zoom,
     bounds,
-    options: { radius: 75, maxZoom: 20 },
+    options: { radius: 100, maxZoom: 20 },
   });
 
   return (
@@ -72,8 +88,24 @@ const Map = () => {
                 <div
                   className="cluster-marker"
                   style={{
-                    width: `${10 + (pointCount / points.length) * 20}`,
-                    height: `${10 + (pointCount / points.length) * 20}`,
+                    width: `${10 + (pointCount / points.length) * 80}px`,
+                    height: `${10 + (pointCount / points.length) * 80}px`,
+                  }}
+                  onClick={() => {
+                    const expansionZoom = Math.min(
+                      supercluster.getClusterExpansionZoom(cluster.id),
+                      20
+                    );
+                    setViewport({
+                      ...viewport,
+                      latitude,
+                      longitude,
+                      zoom: expansionZoom,
+                      transitionInterpolator: new FlyToInterpolator({
+                        speed: 2,
+                      }),
+                      transitionDuration: "auto",
+                    });
                   }}
                 >
                   {pointCount}
@@ -88,12 +120,31 @@ const Map = () => {
               latitude={latitude}
               longitude={longitude}
             >
-              <div className="marker">
-                <button className="marker-button">O</button>
-              </div>
+              <button
+                className="marker-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedCafe(cluster);
+                  console.log(selectedCafe);
+                }}
+              ></button>
             </Marker>
           );
         })}
+        {selectedCafe ? (
+          <Popup
+            latitude={selectedCafe.geometry.coordinates[1]}
+            longitude={selectedCafe.geometry.coordinates[0]}
+            onClose={() => {
+              setSelectedCafe(null);
+            }}
+          >
+            <div>
+              <h2>{selectedCafe.properties.name}</h2>
+              <p>{selectedCafe.properties.address}</p>
+            </div>
+          </Popup>
+        ) : null}
       </ReactMapGL>
     </div>
   );
