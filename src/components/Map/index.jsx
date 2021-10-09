@@ -1,12 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import useSupercluster from "use-supercluster";
-import "mapbox-gl/dist/mapbox-gl.css";
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from '../../store';
+import Loader from '../Loader';
 import "./Map.css";
 
 const Map = () => {
+  const [state, dispatch] = useContext(Context);
+  const [selectedCafe, setSelectedCafe] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   const accessToken =
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
 
@@ -15,9 +19,6 @@ const Map = () => {
     longitude: 144.96,
     zoom: 14,
   });
-
-  const [state, dispatch] = useContext(Context);
-  const [selectedCafe, setSelectedCafe] = useState(null);
 
   useEffect(() => {
     const listener = (e) => {
@@ -43,6 +44,8 @@ const Map = () => {
       })) 
     })
 
+    setIsLoading(false);
+
     return () => {
       window.removeEventListener("keydown", listener);
     };
@@ -64,8 +67,9 @@ const Map = () => {
     options: { radius: 100, maxZoom: 20 },
   });
 
-  return (
-    <div>
+  return isLoading ? (
+      <Loader loading={isLoading} />
+    ) : (
       <ReactMapGL
         {...viewport}
         onViewportChange={setViewport}
@@ -133,6 +137,7 @@ const Map = () => {
             </Marker>
           );
         })}
+        
         {selectedCafe ? (
           <Popup
             latitude={selectedCafe.geometry.coordinates[1]}
@@ -148,7 +153,6 @@ const Map = () => {
           </Popup>
         ) : null}
       </ReactMapGL>
-    </div>
   );
 };
 
