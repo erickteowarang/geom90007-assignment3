@@ -46,7 +46,7 @@ const Map = () => {
     return () => {
       window.removeEventListener("keydown", listener);
     };
-  }, []);
+  }, [dispatch]);
 
   // Map Reference
   const mapRef = useRef();
