@@ -1,17 +1,22 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
+import { Context } from '../../store';
 import "./Map.css";
 
 const Map = () => {
+  const accessToken =
+    "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
+
   const [viewport, setViewport] = useState({
     latitude: -37.81,
     longitude: 144.96,
     zoom: 14,
   });
 
+  const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
 
   useEffect(() => {
@@ -21,33 +26,30 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
+    dispatch({ type: 'SET_POINTS', payload: 
+      cafeData.features.map((cafe) => ({
+        type: "Cafe",
+        properties: {
+          cluster: false,
+          ID: cafe.ID,
+          name: cafe["Trading name"],
+          seatingType: cafe["Seating type"],
+          address: cafe["Street address"],
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [cafe.longitude, cafe.latitude],
+        },
+      })) 
+    })
 
     return () => {
       window.removeEventListener("keydown", listener);
     };
   }, []);
 
-  const accessToken =
-    "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
-
   // Map Reference
   const mapRef = useRef();
-
-  // Cluster points
-  const points = cafeData.features.map((cafe) => ({
-    type: "Cafe",
-    properties: {
-      cluster: false,
-      ID: cafe.ID,
-      name: cafe["Trading name"],
-      seatingType: cafe["Seating type"],
-      address: cafe["Street address"],
-    },
-    geometry: {
-      type: "Point",
-      coordinates: [cafe.longitude, cafe.latitude],
-    },
-  }));
 
   // Get map bounds
   const bounds = mapRef.current
@@ -56,7 +58,7 @@ const Map = () => {
 
   // Get Clusters
   const { clusters, supercluster } = useSupercluster({
-    points,
+    points: state.points,
     zoom: viewport.zoom,
     bounds,
     options: { radius: 100, maxZoom: 20 },
@@ -88,8 +90,8 @@ const Map = () => {
                 <div
                   className="cluster-marker"
                   style={{
-                    width: `${10 + (pointCount / points.length) * 80}px`,
-                    height: `${10 + (pointCount / points.length) * 80}px`,
+                    width: `${10 + (pointCount / state.points.length) * 80}px`,
+                    height: `${10 + (pointCount / state.points.length) * 80}px`,
                   }}
                   onClick={() => {
                     const expansionZoom = Math.min(
