@@ -1,8 +1,12 @@
+/* eslint-disable no-undef */
 import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import useSupercluster from "use-supercluster";
+import { uniqBy } from "lodash";
+
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from '../../store';
+
 import Loader from '../Loader';
 import "./Map.css";
 
@@ -10,15 +14,48 @@ const Map = () => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const accessToken =
-    "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
-
   const [viewport, setViewport] = useState({
     latitude: -37.81,
     longitude: 144.96,
     zoom: 14,
   });
+
+  const accessToken =
+    "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
+
+  const getCafeDetails = (cluster) => {
+    const request = {
+      query: cluster.properties.name,
+      fields: ['place_id']
+    };
+  
+    const service = new google.maps.places.PlacesService(document.createElement('div'));
+  
+    service.findPlaceFromQuery(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        const placeDetailsRequest = {
+          placeId: results[0].place_id,
+          fields: ['name', 'rating', 'formatted_phone_number', 'opening_hours']
+        };
+  
+        service.getDetails(placeDetailsRequest, (place, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            const cafeDetails = {
+              name: place.name,
+              rating: place.rating,
+              opening_hours: place.opening_hours,
+              formatted_phone_number: place.formatted_phone_number,
+              address: cluster.properties.address,
+              latitude: cluster.geometry.coordinates[1],
+              longitude: cluster.geometry.coordinates[0]
+            }
+      
+            setSelectedCafe(cafeDetails);
+          }
+        })
+      }
+    })
+  }
 
   useEffect(() => {
     const listener = (e) => {
@@ -27,8 +64,9 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
+    const uniquePoints = uniqBy(cafeData.features, 'Trading name');
     dispatch({ type: 'SET_POINTS', payload: 
-      cafeData.features.map((cafe) => ({
+      uniquePoints.map((cafe) => ({
         type: "Cafe",
         properties: {
           cluster: false,
@@ -130,8 +168,7 @@ const Map = () => {
                 className="marker-button"
                 onClick={(e) => {
                   e.preventDefault();
-                  setSelectedCafe(cluster);
-                  console.log(selectedCafe);
+                  getCafeDetails(cluster);
                 }}
               ></button>
             </Marker>
@@ -140,15 +177,17 @@ const Map = () => {
         
         {selectedCafe ? (
           <Popup
-            latitude={selectedCafe.geometry.coordinates[1]}
-            longitude={selectedCafe.geometry.coordinates[0]}
+            latitude={selectedCafe.latitude}
+            longitude={selectedCafe.longitude}
             onClose={() => {
               setSelectedCafe(null);
             }}
           >
             <div>
-              <h2>{selectedCafe.properties.name}</h2>
-              <p>{selectedCafe.properties.address}</p>
+              <h2>{selectedCafe.name}</h2>
+              <p>{selectedCafe.address}</p>
+              <p>Rating: {selectedCafe.rating}</p>
+              <p>Currently Open: {selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
             </div>
           </Popup>
         ) : null}
