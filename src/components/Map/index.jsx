@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
+import BeatLoader from 'react-spinners/BeatLoader';
 import useSupercluster from "use-supercluster";
 import { uniqBy } from "lodash";
 
@@ -14,6 +15,7 @@ const Map = () => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPopupLoading, setIsPopupLoading] = useState(false);
   const [viewport, setViewport] = useState({
     latitude: -37.81,
     longitude: 144.96,
@@ -24,6 +26,12 @@ const Map = () => {
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
 
   const getCafeDetails = (cluster) => {
+    setIsPopupLoading(true);
+    setSelectedCafe({
+      latitude: cluster.geometry.coordinates[1],
+      longitude: cluster.geometry.coordinates[0]
+    });
+
     const request = {
       query: cluster.properties.name,
       fields: ['place_id']
@@ -49,8 +57,9 @@ const Map = () => {
               latitude: cluster.geometry.coordinates[1],
               longitude: cluster.geometry.coordinates[0]
             }
-      
+            
             setSelectedCafe(cafeDetails);
+            setIsPopupLoading(false);
           }
         })
       }
@@ -175,7 +184,7 @@ const Map = () => {
           );
         })}
         
-        {selectedCafe ? (
+        {selectedCafe && (
           <Popup
             latitude={selectedCafe.latitude}
             longitude={selectedCafe.longitude}
@@ -183,14 +192,20 @@ const Map = () => {
               setSelectedCafe(null);
             }}
           >
-            <div>
-              <h2>{selectedCafe.name}</h2>
-              <p>{selectedCafe.address}</p>
-              <p>Rating: {selectedCafe.rating}</p>
-              <p>Currently Open: {selectedCafe.opening_hours && selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
-            </div>
+            {isPopupLoading ? (
+              <div className="popupLoader">
+                <BeatLoader color="#36D7B7" size={12} />
+              </div>
+            ) : (
+              <div>
+                <h2>{selectedCafe.name}</h2>
+                <p>{selectedCafe.address}</p>
+                <p>Rating: {selectedCafe.rating}</p>
+                <p>Currently Open: {selectedCafe.opening_hours && selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
+              </div>
+            )}
           </Popup>
-        ) : null}
+        )}
       </ReactMapGL>
   );
 };
