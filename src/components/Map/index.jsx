@@ -187,7 +187,7 @@ const Map = () => {
               <h2>{selectedCafe.name}</h2>
               <p>{selectedCafe.address}</p>
               <p>Rating: {selectedCafe.rating}</p>
-              <p>Currently Open: {selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
+              <p>Currently Open: {selectedCafe.opening_hours && selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
             </div>
           </Popup>
         ) : null}
