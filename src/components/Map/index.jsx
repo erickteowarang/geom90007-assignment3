@@ -7,6 +7,8 @@ import { uniqBy } from "lodash";
 
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from '../../store';
+import Filter from "../Filter";
+import {seatingFilter} from "../Filter";
 
 import Loader from '../Loader';
 import "./Map.css";
@@ -73,7 +75,7 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
-    const uniquePoints = uniqBy(cafeData.features, 'Trading name');
+    const uniquePoints = uniqBy(seatingFilter, 'Trading name');
     dispatch({ type: 'SET_POINTS', payload: 
       uniquePoints.map((cafe) => ({
         type: "Cafe",
@@ -90,6 +92,7 @@ const Map = () => {
         },
       })) 
     })
+
 
     setIsLoading(false);
 
