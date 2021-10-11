@@ -4,7 +4,7 @@ import Store from './store'
 import "mapbox-gl/dist/mapbox-gl.css";
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <Store>
       <Map />

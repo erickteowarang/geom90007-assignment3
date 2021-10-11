@@ -3,13 +3,11 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import BeatLoader from 'react-spinners/BeatLoader';
 import useSupercluster from "use-supercluster";
-import { uniqBy } from "lodash";
-
-import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from '../../store';
 
 import Loader from '../Loader';
 import "./Map.css";
+import { initialisePlacesData } from "../../util";
 
 const Map = () => {
   const [state, dispatch] = useContext(Context);
@@ -26,6 +24,7 @@ const Map = () => {
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
 
   const getCafeDetails = (cluster) => {
+    console.log(cluster);
     setIsPopupLoading(true);
     setSelectedCafe({
       latitude: cluster.geometry.coordinates[1],
@@ -55,7 +54,8 @@ const Map = () => {
               formatted_phone_number: place.formatted_phone_number,
               address: cluster.properties.address,
               latitude: cluster.geometry.coordinates[1],
-              longitude: cluster.geometry.coordinates[0]
+              longitude: cluster.geometry.coordinates[0],
+              hasOutdoorSeating: cluster.properties.hasOutdoorSeating ? 'Yes' : 'No',
             }
             
             setSelectedCafe(cafeDetails);
@@ -73,23 +73,8 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
-    const uniquePoints = uniqBy(cafeData.features, 'Trading name');
-    dispatch({ type: 'SET_POINTS', payload: 
-      uniquePoints.map((cafe) => ({
-        type: "Cafe",
-        properties: {
-          cluster: false,
-          ID: cafe.ID,
-          name: cafe["Trading name"],
-          seatingType: cafe["Seating type"],
-          address: cafe["Street address"],
-        },
-        geometry: {
-          type: "Point",
-          coordinates: [cafe.longitude, cafe.latitude],
-        },
-      })) 
-    })
+    
+    dispatch({ type: 'SET_POINTS', payload: initialisePlacesData() })
 
     setIsLoading(false);
 
@@ -202,6 +187,7 @@ const Map = () => {
                 <p>{selectedCafe.address}</p>
                 <p>Rating: {selectedCafe.rating}</p>
                 <p>Currently Open: {selectedCafe.opening_hours && selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
+                <p>Has outdoor seating: {selectedCafe.hasOutdoorSeating}</p>
               </div>
             )}
           </Popup>
