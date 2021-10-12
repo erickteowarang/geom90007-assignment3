@@ -5,10 +5,21 @@ import "./Filter.css";
 const Filter = () => {
   const [suburb, setSuburb] = useState("Choose a suburb");
   const [seatingType, setSeatingType] = useState("indoor");
+  const [establishmentType, setEstablishmentType] = useState("");
 
+  //   const outdoorCafes = cafeData.filter(
+  //     (cafe) => cafe["Seating type"] === "Seats - Outdoor"
+  //   );
   // Obtains a unique list for the suburb dropdown box
   const uniqueSuburbs = [
     ...new Set(cafeData.features.map((cafe) => cafe["CLUE small area"])),
+  ];
+
+  // Obtains a unique list for establishments
+  const uniqueEstab = [
+    ...new Set(
+      cafeData.features.map((cafe) => cafe["Industry (ANZSIC4) description"])
+    ),
   ];
 
   // Handle Suburb Change
@@ -19,6 +30,11 @@ const Filter = () => {
   // Handle Seating Change
   let handleSeatingChange = (e) => {
     setSeatingType(e.target.value);
+  };
+
+  // Handle estbalishment Change
+  let handleEstabChange = (e) => {
+    setEstablishmentType(e.target.value);
   };
 
   return (
@@ -57,10 +73,22 @@ const Filter = () => {
 
       <div className="suburb-dropdown-container">
         <p> Choose a suburb: </p>
-        <select onChange={handleSuburbChange} id="suburb-dropdown">
+        <select onChange={handleSuburbChange} className="dropdown">
           <option value="Select a suburb"> -- Select a suburb -- </option>
           {uniqueSuburbs.map((suburb) => (
             <option value={suburb}>{suburb}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="estab-container">
+        <p> Choose an establishment type: </p>
+        <select onChange={handleEstabChange} className="dropdown">
+          <option value="Select an Establishment Type">
+            -- Select an Establishment Type --
+          </option>
+          {uniqueEstab.map((estab) => (
+            <option value={estab}>{estab}</option>
           ))}
         </select>
       </div>
