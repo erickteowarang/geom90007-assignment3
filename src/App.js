@@ -29,7 +29,7 @@ function App() {
   console.log(estabType);
   console.log(seatingType);
   console.log(suburb);
-  // console.log(filteredData);
+  console.log(filteredData);
 
   return (
     <div>
