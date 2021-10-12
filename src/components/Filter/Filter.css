@@ -14,16 +14,29 @@ p {
   margin: 3px;
 }
 
-.suburb-dropdown-container {
+.filter-container,
+h3 {
+  margin: 15px 0px 15px 0px;
+}
+
+.suburb-container {
   display: flex;
   flex-direction: column;
-  padding: 0px 5px 20px 5px;
+  padding: 0px 5px 10px 5px;
   justify-content: center;
   align-items: center;
 }
 
 .radio-button-container {
-  padding-bottom: 20px;
+  padding-bottom: 8px;
+}
+
+.estab-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 5px 15px 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 #dropdown-label {
@@ -31,8 +44,9 @@ p {
 }
 
 .dropdown {
-  font-size: 18px;
+  font-size: 15px;
   padding: 0px 5px 0px 5px;
   width: 80%;
   border-radius: 10px;
+  text-align: center;
 }

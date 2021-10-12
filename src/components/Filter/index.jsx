@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import cafeData from "../../data/cafe-restuarants-2019.json";
 import "./Filter.css";
 
-const Filter = () => {
-  const [suburb, setSuburb] = useState("Choose a suburb");
-  const [seatingType, setSeatingType] = useState("indoor");
-  const [establishmentType, setEstablishmentType] = useState("");
-
-  //   const outdoorCafes = cafeData.filter(
-  //     (cafe) => cafe["Seating type"] === "Seats - Outdoor"
-  //   );
+const Filter = (props) => {
   // Obtains a unique list for the suburb dropdown box
   const uniqueSuburbs = [
     ...new Set(cafeData.features.map((cafe) => cafe["CLUE small area"])),
@@ -24,17 +17,17 @@ const Filter = () => {
 
   // Handle Suburb Change
   let handleSuburbChange = (e) => {
-    setSuburb(e.target.value);
+    props.setSuburb(e.target.value);
   };
 
   // Handle Seating Change
   let handleSeatingChange = (e) => {
-    setSeatingType(e.target.value);
+    props.setSeatingType(e.target.value);
   };
 
   // Handle estbalishment Change
   let handleEstabChange = (e) => {
-    setEstablishmentType(e.target.value);
+    props.setEstabType(e.target.value);
   };
 
   return (
@@ -48,7 +41,7 @@ const Filter = () => {
             type="radio"
             id="indoor"
             name="seating-type"
-            value="indoor"
+            value="Seats - Indoor"
             onChange={handleSeatingChange}
           ></input>
           <label for="indoor">Indoor</label>
@@ -56,7 +49,7 @@ const Filter = () => {
             type="radio"
             id="outdoor"
             name="seating-type"
-            value="outdoor"
+            value="Seats - Outdoor"
             onChange={handleSeatingChange}
           ></input>
           <label for="outdoor">Outdoor</label>
@@ -71,7 +64,7 @@ const Filter = () => {
         </form>
       </div>
 
-      <div className="suburb-dropdown-container">
+      <div className="suburb-container">
         <p> Choose a suburb: </p>
         <select onChange={handleSuburbChange} className="dropdown">
           <option value="Select a suburb"> -- Select a suburb -- </option>
@@ -85,7 +78,7 @@ const Filter = () => {
         <p> Choose an establishment type: </p>
         <select onChange={handleEstabChange} className="dropdown">
           <option value="Select an Establishment Type">
-            -- Select an Establishment Type --
+            -- Select Establishment Type --
           </option>
           {uniqueEstab.map((estab) => (
             <option value={estab}>{estab}</option>

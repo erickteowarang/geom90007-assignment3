@@ -5,13 +5,12 @@ import BeatLoader from "react-spinners/BeatLoader";
 import useSupercluster from "use-supercluster";
 import { uniqBy } from "lodash";
 
-import * as cafeData from "../../data/cafe-restuarants-2019.json";
+// import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from "../../store";
-
 import Loader from "../Loader";
 import "./Map.css";
 
-const Map = () => {
+const Map = (props) => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -75,7 +74,7 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
-    const uniquePoints = uniqBy(cafeData.features, "Trading name");
+    const uniquePoints = uniqBy(props.filteredData, "Trading name");
     dispatch({
       type: "SET_POINTS",
       payload: uniquePoints.map((cafe) => ({
