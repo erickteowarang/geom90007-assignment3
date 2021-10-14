@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { uniqBy } from "lodash";
+import React, { useEffect, useState } from "react";
 import Map from "./components/Map";
 import Store from "./store";
 import Filter from "./components/Filter";
@@ -10,27 +9,19 @@ import { initialisePlacesData } from "./util";
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
-  const [seatingType, setSeatingType] = useState("Seats - Indoor");
+  const [seatingType, setSeatingType] = useState(false);
   const [estabType, setEstabType] = useState("Cafes and Restaurants");
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
 
   // Filter logic
   useEffect(() => {
     const filteredData = initialisePlacesData();
-    if (seatingType === "both") {
-      setFilteredData(filteredData.filter(
-        (cafe) =>
-          cafe.properties.establishmentType === estabType &&
-          cafe.properties.suburb === suburb
-      ))
-    } else {
-      setFilteredData(filteredData.filter(
-        (cafe) =>
-          cafe.properties.seatingType === seatingType &&
-          cafe.properties.establishmentType === estabType &&
-          cafe.properties.suburb === suburb
-      ))
-    }
+    setFilteredData(filteredData.filter(
+      (cafe) =>
+        cafe.properties.hasOutdoorSeating === seatingType &&
+        cafe.properties.establishmentType === estabType &&
+        cafe.properties.suburb === suburb
+    ))
   }, [seatingType, estabType, suburb])
 
   console.log(estabType);
@@ -41,6 +32,8 @@ const App = () => {
   return (
     <div>
       <Filter
+        suburb={suburb}
+        estab={estabType}
         setSuburb={setSuburb}
         setSeatingType={setSeatingType}
         setEstabType={setEstabType}
