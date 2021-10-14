@@ -3,14 +3,12 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import BeatLoader from "react-spinners/BeatLoader";
 import useSupercluster from "use-supercluster";
-import { uniqBy } from "lodash";
 
-// import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from "../../store";
 import Loader from "../Loader";
 import "./Map.css";
 
-const Map = (props) => {
+const Map = ({ filteredData }) => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +18,6 @@ const Map = (props) => {
     longitude: 144.96,
     zoom: 14,
   });
-  console.log(props.filteredData);
 
   const accessToken =
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
@@ -75,24 +72,6 @@ const Map = (props) => {
       }
     };
     window.addEventListener("keydown", listener);
-    const uniquePoints = uniqBy(props.filteredData, "Trading name");
-    dispatch({
-      type: "SET_POINTS",
-      payload: uniquePoints.map((cafe) => ({
-        type: "Cafe",
-        properties: {
-          cluster: false,
-          ID: cafe.ID,
-          name: cafe["Trading name"],
-          seatingType: cafe["Seating type"],
-          address: cafe["Street address"],
-        },
-        geometry: {
-          type: "Point",
-          coordinates: [cafe.longitude, cafe.latitude],
-        },
-      })),
-    });
 
     setIsLoading(false);
 
@@ -110,8 +89,9 @@ const Map = (props) => {
     : null;
 
   // Get Clusters
+  console.log('Cluster data', filteredData)
   const { clusters, supercluster } = useSupercluster({
-    points: state.points,
+    points: filteredData,
     zoom: viewport.zoom,
     bounds,
     options: { radius: 100, maxZoom: 20 },
