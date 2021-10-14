@@ -5,37 +5,18 @@ import Store from "./store";
 import Filter from "./components/Filter";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
-import cafeData from "./data/cafe-restuarants-2019.json";
 
-function App() {
+import { initialisePlacesData } from "./util";
+
+const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
   const [seatingType, setSeatingType] = useState("Seats - Indoor");
   const [estabType, setEstabType] = useState("Cafes and Restaurants");
-
-  const initialiseData = () => {
-    return uniqBy(cafeData.features, "Trading name")
-      .map((cafe) => ({
-        type: "Cafe",
-        properties: {
-          cluster: false,
-          ID: cafe.ID,
-          name: cafe["Trading name"],
-          seatingType: cafe["Seating type"],
-          address: cafe["Street address"],
-          establishmentType: cafe["Industry (ANZSIC4) description"],
-          suburb: cafe["CLUE small area"]
-        },
-        geometry: {
-          type: "Point",
-          coordinates: [cafe.longitude, cafe.latitude],
-        },
-    }))
-  }; 
-  const [filteredData, setFilteredData] = useState(initialiseData());
+  const [filteredData, setFilteredData] = useState(initialisePlacesData());
 
   // Filter logic
   useEffect(() => {
-    const filteredData = initialiseData();
+    const filteredData = initialisePlacesData();
     if (seatingType === "both") {
       setFilteredData(filteredData.filter(
         (cafe) =>
