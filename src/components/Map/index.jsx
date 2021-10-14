@@ -7,7 +7,6 @@ import { Context } from '../../store';
 
 import Loader from '../Loader';
 import "./Map.css";
-import { initialisePlacesData } from "../../util";
 
 const Map = ({ filteredData }) => {
   const [state, dispatch] = useContext(Context);
@@ -24,7 +23,6 @@ const Map = ({ filteredData }) => {
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
 
   const getCafeDetails = (cluster) => {
-    console.log(cluster);
     setIsPopupLoading(true);
     setSelectedCafe({
       latitude: cluster.geometry.coordinates[1],
@@ -91,8 +89,7 @@ const Map = ({ filteredData }) => {
     ? mapRef.current.getMap().getBounds().toArray().flat()
     : null;
 
-  // Get Clusters
-  console.log('Cluster data', filteredData)
+  // Get clusters
   const { clusters, supercluster } = useSupercluster({
     points: filteredData,
     zoom: viewport.zoom,
@@ -190,6 +187,7 @@ const Map = ({ filteredData }) => {
                   ? "Yes"
                   : "No"}
               </p>
+              <p>Has outdoor seating: {selectedCafe.hasOutdoorSeating}</p>
             </div>
           )}
         </Popup>

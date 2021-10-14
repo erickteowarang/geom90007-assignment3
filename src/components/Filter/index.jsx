@@ -5,17 +5,17 @@ import { getEstablishments, getSuburbs } from "../../util";
 
 const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
   // Handle Suburb Change
-  let handleSuburbChange = (e) => {
+  const handleSuburbChange = (e) => {
     setSuburb(e.target.value);
   };
 
   // Handle Seating Change
-  let handleSeatingChange = (e) => {
-    setSeatingType(e.target.value);
+  const handleSeatingChange = (e) => {
+    setSeatingType(e.target.value === "outdoor");
   };
 
   // Handle estbalishment Change
-  let handleEstabChange = (e) => {
+  const handleEstabChange = (e) => {
     setEstabType(e.target.value);
   };
 
@@ -30,7 +30,8 @@ const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
             type="radio"
             id="outdoor"
             name="seating-type"
-            value="true"
+            value="outdoor"
+            defaultChecked
             onChange={handleSeatingChange}
           ></input>
           <label for="outdoor">Yes</label>
@@ -38,9 +39,8 @@ const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
             type="radio"
             id="both"
             name="seating-type"
-            value="false"
+            value="any"
             onChange={handleSeatingChange}
-            checked={true}
           ></input>
           <label for="both">No</label>
         </form>
