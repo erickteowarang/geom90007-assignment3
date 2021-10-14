@@ -20,6 +20,7 @@ const Map = (props) => {
     longitude: 144.96,
     zoom: 14,
   });
+  console.log(props.filteredData);
 
   const accessToken =
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
