@@ -12,25 +12,32 @@ const App = () => {
   const [seatingType, setSeatingType] = useState(true);
   const [estabType, setEstabType] = useState("Cafes and Restaurants");
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
+  const [showAll, setShowAll] = useState(false);
 
   // Filter logic
   useEffect(() => {
-    console.log('Outdoor', seatingType);
+    console.log("Outdoor", seatingType);
+    console.log(showAll);
     const initialData = initialisePlacesData();
-    let newData = initialData.filter(
-      (cafe) =>
-        cafe.properties.establishmentType === estabType &&
-        cafe.properties.suburb === suburb
-    )
+    if (showAll) {
+      setFilteredData(initialData);
+    } else {
+      let newData = initialData.filter(
+        (cafe) =>
+          cafe.properties.establishmentType === estabType &&
+          cafe.properties.suburb === suburb
+      );
 
-    if (seatingType) {
-      console.log('before filter', newData);
-      newData = newData.filter((cafe) => cafe.properties.hasOutdoorSeating === true)
-      console.log('after filter', newData);
+      if (seatingType) {
+        console.log("before filter", newData);
+        newData = newData.filter(
+          (cafe) => cafe.properties.hasOutdoorSeating === true
+        );
+        console.log("after filter", newData);
+      }
+      setFilteredData(newData);
     }
-
-    setFilteredData(newData);
-  }, [seatingType, estabType, suburb])
+  }, [seatingType, estabType, suburb, showAll]);
 
   // console.log(estabType);
   // console.log(seatingType);
@@ -46,12 +53,13 @@ const App = () => {
         setSuburb={setSuburb}
         setSeatingType={setSeatingType}
         setEstabType={setEstabType}
+        setShowAll={setShowAll}
       />
       <Store>
         <Map filteredData={filteredData} />
       </Store>
     </div>
   );
-}
+};
 
 export default App;

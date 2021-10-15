@@ -3,7 +3,14 @@ import "./Filter.css";
 
 import { getEstablishments, getSuburbs } from "../../util";
 
-const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
+const Filter = ({
+  suburb,
+  estab,
+  setSuburb,
+  setSeatingType,
+  setEstabType,
+  setShowAll,
+}) => {
   // Handle Suburb Change
   const handleSuburbChange = (e) => {
     setSuburb(e.target.value);
@@ -17,6 +24,11 @@ const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
   // Handle estbalishment Change
   const handleEstabChange = (e) => {
     setEstabType(e.target.value);
+  };
+
+  // Handle show-all Change
+  const handleShowAllChange = () => {
+    setShowAll((prevCheck) => !prevCheck);
   };
 
   return (
@@ -51,7 +63,9 @@ const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
         <select onChange={handleSuburbChange} className="dropdown">
           <option value="Select a suburb"> -- Select a suburb -- </option>
           {getSuburbs().map((cafeSuburb) => (
-            <option value={cafeSuburb} selected={suburb === cafeSuburb}>{cafeSuburb}</option>
+            <option value={cafeSuburb} selected={suburb === cafeSuburb}>
+              {cafeSuburb}
+            </option>
           ))}
         </select>
       </div>
@@ -63,9 +77,23 @@ const Filter = ({ suburb, estab, setSuburb, setSeatingType, setEstabType }) => {
             -- Select Establishment Type --
           </option>
           {getEstablishments().map((cafeEstab) => (
-            <option value={cafeEstab} selected={estab === cafeEstab}>{cafeEstab}</option>
+            <option value={cafeEstab} selected={estab === cafeEstab}>
+              {cafeEstab}
+            </option>
           ))}
         </select>
+      </div>
+      {/* edit here dunno what the onchange is*/}
+      <div className="showall-container">
+        <p> Show all data: </p>
+        <label class="switch">
+          <input
+            type="checkbox"
+            value="checked"
+            onChange={handleShowAllChange}
+          ></input>
+          <span class="slider"></span>
+        </label>
       </div>
     </div>
   );
