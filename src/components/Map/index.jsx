@@ -12,6 +12,7 @@ import "./Map.css";
 const Map = ({ filteredData }) => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
+  const [selectedLandmark, setSelectedLandmark] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPopupLoading, setIsPopupLoading] = useState(false);
   const [viewport, setViewport] = useState({
@@ -113,9 +114,28 @@ const Map = ({ filteredData }) => {
     >
       {landmarks.features.map((landmark) => (
         <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
-          <button class="landmark-btn"> </button>
+          <button 
+            className="landmark-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setSelectedLandmark(landmark);
+            }}
+          >
+          </button>
         </Marker>
       ))}
+      {selectedLandmark ? (
+        <Popup 
+          latitude={selectedLandmark.Latitude} 
+          longitude = {selectedLandmark.Longitude}
+          onClose={() => {
+            setSelectedLandmark(null);
+          }}>
+          <div>
+            <h2>{selectedLandmark["Feature Name"]}</h2>
+          </div>
+        </Popup>
+      ) : null}
       {clusters.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const { cluster: isCluster, point_count: pointCount } =
