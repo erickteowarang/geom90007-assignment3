@@ -101,29 +101,3 @@ const Filter = ({
 
 export default Filter;
 
-import React from "react";
-import cafeData from "../../data/cafe-restuarants-2019.json";
-
-
-var type = "Indoor"
-var area = "Melbourne (CBD)"
-
-export const seatingFilter = cafeData.features.filter(
-        (cafe) => cafe["Seating type"] === `Seats - ${type}` && 
-        cafe["CLUE small area"] === `${area}`
-    )
-
-
-const Filter = () => {
-   
-    
-  return (
-      <div>
-          
-      </div>
-  )  
-}
-
-
-
-export default Filter;

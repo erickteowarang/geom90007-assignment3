@@ -111,15 +111,16 @@ const Map = ({ filteredData }) => {
       mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
       ref={mapRef}
     >
-      {clusters.map((cluster) => {
-        const [longitude, latitude] = cluster.geometry.coordinates;
-        const { cluster: isCluster, point_count: pointCount } =
-          cluster.properties;
       {landmarks.features.map((landmark) => (
         <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
           <button class="landmark-btn"> </button>
         </Marker>
       ))}
+      {clusters.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const { cluster: isCluster, point_count: pointCount } =
+          cluster.properties;
+      
 
         if (isCluster) {
           return (
