@@ -1,24 +1,34 @@
-import React, { useState } from "react";
-import cafeData from "../../data/cafe-restuarants-2019.json";
+import React from "react";
 import "./Filter.css";
 
-const Filter = () => {
-  const [suburb, setSuburb] = useState("Choose a suburb");
-  const [seatingType, setSeatingType] = useState("indoor");
+import { getEstablishments, getSuburbs } from "../../util";
 
-  // Obtains a unique list for the suburb dropdown box
-  const uniqueSuburbs = [
-    ...new Set(cafeData.features.map((cafe) => cafe["CLUE small area"])),
-  ];
-
+const Filter = ({
+  suburb,
+  estab,
+  setSuburb,
+  setSeatingType,
+  setEstabType,
+  setShowAll,
+}) => {
   // Handle Suburb Change
-  let handleSuburbChange = (e) => {
+  const handleSuburbChange = (e) => {
     setSuburb(e.target.value);
   };
 
   // Handle Seating Change
-  let handleSeatingChange = (e) => {
-    setSeatingType(e.target.value);
+  const handleSeatingChange = (e) => {
+    setSeatingType(e.target.value === "outdoor");
+  };
+
+  // Handle estbalishment Change
+  const handleEstabChange = (e) => {
+    setEstabType(e.target.value);
+  };
+
+  // Handle show-all Change
+  const handleShowAllChange = () => {
+    setShowAll((prevCheck) => !prevCheck);
   };
 
   return (
@@ -26,43 +36,64 @@ const Filter = () => {
       <h3>Filter Cafes</h3>
 
       <div className="radio-button-container">
-        <p> Choose a seating type: </p>
+        <p>Do you need outdoor seating? </p>
         <form>
-          <input
-            type="radio"
-            id="indoor"
-            name="seating-type"
-            value="indoor"
-            onChange={handleSeatingChange}
-          ></input>
-          <label for="indoor">Indoor</label>
           <input
             type="radio"
             id="outdoor"
             name="seating-type"
             value="outdoor"
+            defaultChecked
             onChange={handleSeatingChange}
           ></input>
-          <label for="outdoor">Outdoor</label>
+          <label for="outdoor">Yes</label>
           <input
             type="radio"
             id="both"
             name="seating-type"
-            value="both"
+            value="any"
             onChange={handleSeatingChange}
           ></input>
-          <label for="both">Both</label>
+          <label for="both">No</label>
         </form>
       </div>
 
-      <div className="suburb-dropdown-container">
+      <div className="suburb-container">
         <p> Choose a suburb: </p>
-        <select onChange={handleSuburbChange} id="suburb-dropdown">
+        <select onChange={handleSuburbChange} className="dropdown">
           <option value="Select a suburb"> -- Select a suburb -- </option>
-          {uniqueSuburbs.map((suburb) => (
-            <option value={suburb}>{suburb}</option>
+          {getSuburbs().map((cafeSuburb) => (
+            <option value={cafeSuburb} selected={suburb === cafeSuburb}>
+              {cafeSuburb}
+            </option>
           ))}
         </select>
+      </div>
+
+      <div className="estab-container">
+        <p> Choose an establishment type: </p>
+        <select onChange={handleEstabChange} className="dropdown">
+          <option value="Select an Establishment Type">
+            -- Select Establishment Type --
+          </option>
+          {getEstablishments().map((cafeEstab) => (
+            <option value={cafeEstab} selected={estab === cafeEstab}>
+              {cafeEstab}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* edit here dunno what the onchange is*/}
+      <div className="showall-container">
+        <p> Show all data: </p>
+        <label class="switch">
+          <input
+            type="checkbox"
+            value="checked"
+            onChange={handleShowAllChange}
+          ></input>
+          <span class="slider"></span>
+        </label>
       </div>
     </div>
   );
