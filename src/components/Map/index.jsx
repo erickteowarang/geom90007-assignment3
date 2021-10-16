@@ -7,8 +7,7 @@ import { uniqBy } from "lodash";
 
 import * as cafeData from "../../data/cafe-restuarants-2019.json";
 import { Context } from '../../store';
-import Filter from "../Filter";
-import {seatingFilter} from "../Filter";
+import * as landmarks from "../../data/landmarks.json";
 
 import Loader from '../Loader';
 import "./Map.css";
@@ -118,21 +117,26 @@ const Map = () => {
   });
 
   return isLoading ? (
-      <Loader loading={isLoading} />
-    ) : (
-      <ReactMapGL
-        {...viewport}
-        onViewportChange={setViewport}
-        width="100vw"
-        height="100vh"
-        mapboxApiAccessToken={accessToken}
-        mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
-        ref={mapRef}
-      >
-        {clusters.map((cluster) => {
-          const [longitude, latitude] = cluster.geometry.coordinates;
-          const { cluster: isCluster, point_count: pointCount } =
-            cluster.properties;
+    <Loader loading={isLoading} />
+  ) : (
+    <ReactMapGL
+      {...viewport}
+      onViewportChange={setViewport}
+      width="100vw"
+      height="100vh"
+      mapboxApiAccessToken={accessToken}
+      mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
+      ref={mapRef}
+    >
+      {landmarks.features.map((landmark) => (
+        <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
+          <button class="landmark-btn"> </button>
+        </Marker>
+      ))}
+      {clusters.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const { cluster: isCluster, point_count: pointCount } =
+          cluster.properties;
 
           if (isCluster) {
             return (
