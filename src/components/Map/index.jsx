@@ -1,16 +1,14 @@
 /* eslint-disable no-undef */
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import BeatLoader from "react-spinners/BeatLoader";
 import useSupercluster from "use-supercluster";
-import { Context } from '../../store';
 import * as landmarks from "../../data/landmarks.json";
 
 import Loader from '../Loader';
 import "./Map.css";
 
 const Map = ({ filteredData }) => {
-  const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [selectedLandmark, setSelectedLandmark] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -76,13 +74,12 @@ const Map = ({ filteredData }) => {
     };
     window.addEventListener("keydown", listener);
 
-
     setIsLoading(false);
 
     return () => {
       window.removeEventListener("keydown", listener);
     };
-  }, [dispatch]);
+  }, []);
 
   // Map Reference
   const mapRef = useRef();
@@ -136,21 +133,17 @@ const Map = ({ filteredData }) => {
           </div>
         </Popup>
       ) : null}
+      
       {clusters.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const { cluster: isCluster, point_count: pointCount } =
           cluster.properties;
-      
 
         if (isCluster) {
           return (
             <Marker key={cluster.id} latitude={latitude} longitude={longitude}>
               <div
                 className="cluster-marker"
-                style={{
-                  width: `${10 + (pointCount / state.points.length) * 80}px`,
-                  height: `${10 + (pointCount / state.points.length) * 80}px`,
-                }}
                 onClick={() => {
                   const expansionZoom = Math.min(
                     supercluster.getClusterExpansionZoom(cluster.id),

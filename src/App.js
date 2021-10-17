@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 import Map from "./components/Map";
-import Store from "./store";
 import Filter from "./components/Filter";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
@@ -16,8 +16,6 @@ const App = () => {
 
   // Filter logic
   useEffect(() => {
-    console.log("Outdoor", seatingType);
-    console.log(showAll);
     const initialData = initialisePlacesData();
     if (showAll) {
       setFilteredData(initialData);
@@ -39,13 +37,8 @@ const App = () => {
     }
   }, [seatingType, estabType, suburb, showAll]);
 
-  // console.log(estabType);
-  // console.log(seatingType);
-  // console.log(suburb);
-  // console.log(filteredData);
-
   return (
-    <div>
+    <ChakraProvider>
       <Filter
         suburb={suburb}
         estab={estabType}
@@ -55,10 +48,8 @@ const App = () => {
         setEstabType={setEstabType}
         setShowAll={setShowAll}
       />
-      <Store>
-        <Map filteredData={filteredData} />
-      </Store>
-    </div>
+      <Map filteredData={filteredData} />
+    </ChakraProvider>
   );
 };
 

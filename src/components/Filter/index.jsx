@@ -1,4 +1,14 @@
 import React from "react";
+import { 
+  Box,
+  Heading,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  Stack,
+  Radio
+} from "@chakra-ui/react"
+import Select from "react-select";
 import "./Filter.css";
 
 import { getEstablishments, getSuburbs } from "../../util";
@@ -13,17 +23,17 @@ const Filter = ({
 }) => {
   // Handle Suburb Change
   const handleSuburbChange = (e) => {
-    setSuburb(e.target.value);
+    setSuburb(e.value);
   };
 
   // Handle Seating Change
-  const handleSeatingChange = (e) => {
-    setSeatingType(e.target.value === "outdoor");
+  const handleSeatingChange = (value) => {
+    setSeatingType(value === "outdoor");
   };
 
-  // Handle estbalishment Change
+  // Handle establishment Change
   const handleEstabChange = (e) => {
-    setEstabType(e.target.value);
+    setEstabType(e.value);
   };
 
   // Handle show-all Change
@@ -31,57 +41,67 @@ const Filter = ({
     setShowAll((prevCheck) => !prevCheck);
   };
 
-  return (
-    <div className="filter-container">
-      <h3>Filter Cafes</h3>
+  const generateSelectOptions = (originalArray) => {
+    const optionsArray = originalArray.map(cafeSuburb => (
+      {
+        value: cafeSuburb,
+        label: cafeSuburb
+      }
+    ))
 
-      <div className="radio-button-container">
-        <p>Do you need outdoor seating? </p>
-        <form>
-          <input
-            type="radio"
-            id="outdoor"
-            name="seating-type"
-            value="outdoor"
-            defaultChecked
-            onChange={handleSeatingChange}
-          ></input>
-          <label for="outdoor">Yes</label>
-          <input
-            type="radio"
-            id="both"
-            name="seating-type"
-            value="any"
-            onChange={handleSeatingChange}
-          ></input>
-          <label for="both">No</label>
-        </form>
-      </div>
+    optionsArray.unshift({
+      value: "All",
+      label: "All"
+    })
+
+    return optionsArray;
+  }
+
+  return (
+    <Box 
+      w="sm"
+      borderWidth="2px"
+      borderRadius="md"
+      bg="gray.600"
+      p={5}
+      className="filter-container"
+    >
+      <Heading size="md">Filter Cafes</Heading>
+
+      <FormControl as="fieldset">
+        <FormLabel as="legend">Do you need outdoor seating?</FormLabel>
+        <RadioGroup defaultValue="outdoor" name="seating-type" onChange={handleSeatingChange}>
+        <Stack direction="row">
+            <Radio value="outdoor">Yes</Radio>
+            <Radio value="any">No</Radio>
+          </Stack>
+        </RadioGroup>
+      </FormControl>
 
       <div className="suburb-container">
         <p> Choose a suburb: </p>
-        <select onChange={handleSuburbChange} className="dropdown">
-          <option value="Select a suburb"> -- Select a suburb -- </option>
-          {getSuburbs().map((cafeSuburb) => (
-            <option value={cafeSuburb} selected={suburb === cafeSuburb}>
-              {cafeSuburb}
-            </option>
-          ))}
-        </select>
+        <Select 
+          className="dropdown"
+          options={generateSelectOptions(getSuburbs())}
+          onChange={handleSuburbChange}
+          defaultValue={{
+            value: suburb,
+            label: suburb
+          }}
+        />
       </div>
 
       <div className="estab-container">
         <p> Choose an establishment type: </p>
-        <select onChange={handleEstabChange} className="dropdown">
-          <option value="Select an Establishment Type">
-            -- Select Establishment Type --
-          </option>
-          {getEstablishments().map((cafeEstab) => (
-            <option value={cafeEstab} selected={estab === cafeEstab}>
-              {cafeEstab}
-            </option>
-          ))}
-        </select>
+        <Select 
+          className="dropdown"
+          options={generateSelectOptions(getEstablishments())}
+          onChange={handleEstabChange}
+          defaultValue={{
+            value: estab,
+            label: estab
+          }}
+        />
       </div>
       {/* edit here dunno what the onchange is*/}
       <div className="showall-container">
@@ -95,7 +115,7 @@ const Filter = ({
           <span class="slider"></span>
         </label>
       </div>
-    </div>
+    </Box>
   );
 };
 
