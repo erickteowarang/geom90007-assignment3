@@ -1,6 +1,6 @@
-import React from 'react';
-import BeatLoader from 'react-spinners/BeatLoader';
-import './Loader.css';
+import React from "react";
+import BeatLoader from "react-spinners/BeatLoader";
+import "./Loader.css";
 
 const Loader = ({ loading }) => (
   <div className="loaderContainer">

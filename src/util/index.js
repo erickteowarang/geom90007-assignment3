@@ -1,6 +1,19 @@
 import { uniqBy } from "lodash";
 import * as cafeData from "../data/cafe-restaurants-2019.json";
 
+// Obtains a unique list for the suburb dropdown box
+export const getSuburbs = () => [
+  ...new Set(cafeData.features.map((cafe) => cafe["CLUE small area"])),
+];
+
+// Obtains a unique list for establishments
+export const getEstablishments = () => [
+  ...new Set(
+    cafeData.features.map((cafe) => cafe["Industry (ANZSIC4) description"])
+  ),
+];
+
+
 /*  
   Function to check if a given location has outdoor seating
   First checks if the trading name is the same, then if it has outdoor seating, 
@@ -25,6 +38,8 @@ export const initialisePlacesData = () => {
       name: cafe["Trading name"],
       seatingType: cafe["Seating type"],
       address: cafe["Street address"],
+      establishmentType: cafe["Industry (ANZSIC4) description"],
+      suburb: cafe["CLUE small area"],
       hasOutdoorSeating: checkOutdoorSeating(cafe),
     },
     geometry: {

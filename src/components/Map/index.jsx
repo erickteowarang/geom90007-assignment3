@@ -1,15 +1,14 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
-import BeatLoader from 'react-spinners/BeatLoader';
+import BeatLoader from "react-spinners/BeatLoader";
 import useSupercluster from "use-supercluster";
 import { Context } from '../../store';
 
 import Loader from '../Loader';
 import "./Map.css";
-import { initialisePlacesData } from "../../util";
 
-const Map = () => {
+const Map = ({ filteredData }) => {
   const [state, dispatch] = useContext(Context);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,27 +23,28 @@ const Map = () => {
     "pk.eyJ1Ijoic2FuZG9ubCIsImEiOiJja3QzbnRsazcwOWoyMndudW94N2M5Y3gyIn0.W4x7VhJckEqamtkQE-e9yA";
 
   const getCafeDetails = (cluster) => {
-    console.log(cluster);
     setIsPopupLoading(true);
     setSelectedCafe({
       latitude: cluster.geometry.coordinates[1],
-      longitude: cluster.geometry.coordinates[0]
+      longitude: cluster.geometry.coordinates[0],
     });
 
     const request = {
       query: cluster.properties.name,
-      fields: ['place_id']
+      fields: ["place_id"],
     };
-  
-    const service = new google.maps.places.PlacesService(document.createElement('div'));
-  
+
+    const service = new google.maps.places.PlacesService(
+      document.createElement("div")
+    );
+
     service.findPlaceFromQuery(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
         const placeDetailsRequest = {
           placeId: results[0].place_id,
-          fields: ['name', 'rating', 'formatted_phone_number', 'opening_hours']
+          fields: ["name", "rating", "formatted_phone_number", "opening_hours"],
         };
-  
+
         service.getDetails(placeDetailsRequest, (place, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             const cafeDetails = {
@@ -61,10 +61,10 @@ const Map = () => {
             setSelectedCafe(cafeDetails);
             setIsPopupLoading(false);
           }
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     const listener = (e) => {
@@ -73,8 +73,6 @@ const Map = () => {
       }
     };
     window.addEventListener("keydown", listener);
-    
-    dispatch({ type: 'SET_POINTS', payload: initialisePlacesData() })
 
     setIsLoading(false);
 
@@ -91,108 +89,110 @@ const Map = () => {
     ? mapRef.current.getMap().getBounds().toArray().flat()
     : null;
 
-  // Get Clusters
+  // Get clusters
   const { clusters, supercluster } = useSupercluster({
-    points: state.points,
+    points: filteredData,
     zoom: viewport.zoom,
     bounds,
     options: { radius: 100, maxZoom: 20 },
   });
 
   return isLoading ? (
-      <Loader loading={isLoading} />
-    ) : (
-      <ReactMapGL
-        {...viewport}
-        onViewportChange={setViewport}
-        width="100vw"
-        height="100vh"
-        mapboxApiAccessToken={accessToken}
-        mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
-        ref={mapRef}
-      >
-        {clusters.map((cluster) => {
-          const [longitude, latitude] = cluster.geometry.coordinates;
-          const { cluster: isCluster, point_count: pointCount } =
-            cluster.properties;
+    <Loader loading={isLoading} />
+  ) : (
+    <ReactMapGL
+      {...viewport}
+      onViewportChange={setViewport}
+      width="100vw"
+      height="100vh"
+      mapboxApiAccessToken={accessToken}
+      mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
+      ref={mapRef}
+    >
+      {clusters.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const { cluster: isCluster, point_count: pointCount } =
+          cluster.properties;
 
-          if (isCluster) {
-            return (
-              <Marker
-                key={cluster.id}
-                latitude={latitude}
-                longitude={longitude}
-              >
-                <div
-                  className="cluster-marker"
-                  style={{
-                    width: `${10 + (pointCount / state.points.length) * 80}px`,
-                    height: `${10 + (pointCount / state.points.length) * 80}px`,
-                  }}
-                  onClick={() => {
-                    const expansionZoom = Math.min(
-                      supercluster.getClusterExpansionZoom(cluster.id),
-                      20
-                    );
-                    setViewport({
-                      ...viewport,
-                      latitude,
-                      longitude,
-                      zoom: expansionZoom,
-                      transitionInterpolator: new FlyToInterpolator({
-                        speed: 2,
-                      }),
-                      transitionDuration: "auto",
-                    });
-                  }}
-                >
-                  {pointCount}
-                </div>
-              </Marker>
-            );
-          }
-
+        if (isCluster) {
           return (
-            <Marker
-              key={cluster.properties.ID}
-              latitude={latitude}
-              longitude={longitude}
-            >
-              <button
-                className="marker-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  getCafeDetails(cluster);
+            <Marker key={cluster.id} latitude={latitude} longitude={longitude}>
+              <div
+                className="cluster-marker"
+                style={{
+                  width: `${10 + (pointCount / state.points.length) * 80}px`,
+                  height: `${10 + (pointCount / state.points.length) * 80}px`,
                 }}
-              ></button>
+                onClick={() => {
+                  const expansionZoom = Math.min(
+                    supercluster.getClusterExpansionZoom(cluster.id),
+                    20
+                  );
+                  setViewport({
+                    ...viewport,
+                    latitude,
+                    longitude,
+                    zoom: expansionZoom,
+                    transitionInterpolator: new FlyToInterpolator({
+                      speed: 2,
+                    }),
+                    transitionDuration: "auto",
+                  });
+                }}
+              >
+                {pointCount}
+              </div>
             </Marker>
           );
-        })}
-        
-        {selectedCafe && (
-          <Popup
-            latitude={selectedCafe.latitude}
-            longitude={selectedCafe.longitude}
-            onClose={() => {
-              setSelectedCafe(null);
-            }}
+        }
+
+        return (
+          <Marker
+            key={cluster.properties.ID}
+            latitude={latitude}
+            longitude={longitude}
           >
-            {isPopupLoading ? (
-              <div className="popupLoader">
-                <BeatLoader color="#36D7B7" size={12} />
-              </div>
-            ) : (
-              <div>
-                <h2>{selectedCafe.name}</h2>
-                <p>{selectedCafe.address}</p>
-                <p>Rating: {selectedCafe.rating}</p>
-                <p>Currently Open: {selectedCafe.opening_hours && selectedCafe.opening_hours.open_now ? 'Yes' : 'No'}</p>
-                <p>Has outdoor seating: {selectedCafe.hasOutdoorSeating}</p>
-              </div>
-            )}
-          </Popup>
-        )}
-      </ReactMapGL>
+            <button
+              className="marker-button"
+              onClick={(e) => {
+                e.preventDefault();
+                getCafeDetails(cluster);
+              }}
+            ></button>
+          </Marker>
+        );
+      })}
+
+      {selectedCafe && (
+        <Popup
+          latitude={selectedCafe.latitude}
+          longitude={selectedCafe.longitude}
+          onClose={() => {
+            setSelectedCafe(null);
+          }}
+        >
+          {isPopupLoading ? (
+            <div className="popupLoader">
+              <BeatLoader color="#36D7B7" size={12} />
+            </div>
+          ) : (
+            <div>
+              <h2>{selectedCafe.name}</h2>
+              <p>{selectedCafe.address}</p>
+              <p>Rating: {selectedCafe.rating}</p>
+              <p>
+                Currently Open:{" "}
+                {selectedCafe.opening_hours &&
+                selectedCafe.opening_hours.open_now
+                  ? "Yes"
+                  : "No"}
+              </p>
+              <p>Has outdoor seating: {selectedCafe.hasOutdoorSeating}</p>
+            </div>
+          )}
+        </Popup>
+      )}
+    </ReactMapGL>
   );
 };
 
