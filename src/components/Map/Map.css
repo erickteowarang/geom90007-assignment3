@@ -17,6 +17,15 @@
   border: 0;
 }
 
+.landmark-btn {
+  color: #fff;
+  background: blueviolet;
+  text-decoration: none;
+  border-radius: 100%;
+  padding: 10px;
+  border: 0;
+}
+
 .popupLoader {
   padding: 2rem;
 }
