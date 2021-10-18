@@ -4,9 +4,12 @@ import {
   Heading,
   FormControl,
   FormLabel,
+  Radio,
   RadioGroup,
+  Checkbox,
+  CheckboxGroup,
   Stack,
-  Radio
+  VStack
 } from "@chakra-ui/react"
 import Select from "react-select";
 import "./Filter.css";
@@ -19,7 +22,6 @@ const Filter = ({
   setSuburb,
   setSeatingType,
   setEstabType,
-  setShowAll,
 }) => {
   // Handle Suburb Change
   const handleSuburbChange = (e) => {
@@ -32,20 +34,16 @@ const Filter = ({
   };
 
   // Handle establishment Change
-  const handleEstabChange = (e) => {
-    setEstabType(e.value);
-  };
-
-  // Handle show-all Change
-  const handleShowAllChange = () => {
-    setShowAll((prevCheck) => !prevCheck);
+  const handleEstabChange = (value) => {
+    console.log(value);
+    setEstabType(value);
   };
 
   const generateSelectOptions = (originalArray) => {
-    const optionsArray = originalArray.map(cafeSuburb => (
+    const optionsArray = originalArray.map(arrayValue => (
       {
-        value: cafeSuburb,
-        label: cafeSuburb
+        value: arrayValue,
+        label: arrayValue
       }
     ))
 
@@ -62,59 +60,50 @@ const Filter = ({
       w="sm"
       borderWidth="2px"
       borderRadius="md"
-      bg="gray.600"
-      p={5}
+      bg="white"
+      p={6}
       className="filter-container"
     >
-      <Heading size="md">Filter Cafes</Heading>
+      <VStack spacing="16px" align="flex-start">
+        <Heading size="md">Filter Points of Interest</Heading>
 
-      <FormControl as="fieldset">
-        <FormLabel as="legend">Do you need outdoor seating?</FormLabel>
-        <RadioGroup defaultValue="outdoor" name="seating-type" onChange={handleSeatingChange}>
-        <Stack direction="row">
-            <Radio value="outdoor">Yes</Radio>
-            <Radio value="any">No</Radio>
-          </Stack>
-        </RadioGroup>
-      </FormControl>
+        <FormControl as="fieldset">
+          <FormLabel as="legend">Do you need outdoor seating?</FormLabel>
+          <RadioGroup defaultValue="outdoor" name="seating-type" onChange={handleSeatingChange}>
+          <Stack direction="row">
+              <Radio value="outdoor">Yes</Radio>
+              <Radio value="any">No</Radio>
+            </Stack>
+          </RadioGroup>
+        </FormControl>
 
-      <div className="suburb-container">
-        <p> Choose a suburb: </p>
-        <Select 
-          className="dropdown"
-          options={generateSelectOptions(getSuburbs())}
-          onChange={handleSuburbChange}
-          defaultValue={{
-            value: suburb,
-            label: suburb
-          }}
-        />
-      </div>
+        <FormControl>
+          <FormLabel>Select a suburb:</FormLabel>
+          <Select 
+            className="dropdown"
+            options={generateSelectOptions(getSuburbs())}
+            onChange={handleSuburbChange}
+            defaultValue={{
+              value: suburb,
+              label: suburb
+            }}
+          />
+        </FormControl>
 
-      <div className="estab-container">
-        <p> Choose an establishment type: </p>
-        <Select 
-          className="dropdown"
-          options={generateSelectOptions(getEstablishments())}
-          onChange={handleEstabChange}
-          defaultValue={{
-            value: estab,
-            label: estab
-          }}
-        />
-      </div>
-      {/* edit here dunno what the onchange is*/}
-      <div className="showall-container">
-        <p> Show all data: </p>
-        <label class="switch">
-          <input
-            type="checkbox"
-            value="checked"
-            onChange={handleShowAllChange}
-          ></input>
-          <span class="slider"></span>
-        </label>
-      </div>
+        <FormControl as="fieldset">
+          <FormLabel as="legend">Choose an establishment type</FormLabel>
+          <CheckboxGroup 
+            defaultValue={estab}
+            onChange={handleEstabChange}
+          >
+            <Stack>
+              {getEstablishments().map(establishment => (
+                <Checkbox value={establishment}>{establishment}</Checkbox>
+              ))}
+            </Stack>
+          </CheckboxGroup>
+        </FormControl>
+      </VStack>
     </Box>
   );
 };

@@ -10,7 +10,7 @@ import { initialisePlacesData } from "./util";
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
   const [seatingType, setSeatingType] = useState(true);
-  const [estabType, setEstabType] = useState("Cafes and Restaurants");
+  const [estabType, setEstabType] = useState(["Cafes and Restaurants"]);
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
   const [showAll, setShowAll] = useState(false);
 
@@ -22,7 +22,7 @@ const App = () => {
     } else {
       let newData = initialData.filter(
         (cafe) =>
-          cafe.properties.establishmentType === estabType &&
+          estabType.includes(cafe.properties.establishmentType) &&
           cafe.properties.suburb === suburb
       );
 
