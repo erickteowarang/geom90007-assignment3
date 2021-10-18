@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
 
 import { initialisePlacesData } from "./util";
+import { truncate } from "lodash";
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
@@ -20,19 +21,13 @@ const App = () => {
     if (showAll) {
       setFilteredData(initialData);
     } else {
-      let newData = initialData.filter(
-        (cafe) =>
-          estabType.includes(cafe.properties.establishmentType) &&
-          cafe.properties.suburb === suburb
+      let newData = initialData.filter(location => 
+        estabType.includes(location.properties.establishmentType) &&
+        (suburb === "All" || location.properties.suburb === suburb) &&
+        (!seatingType || location.properties.hasOutdoorSeating === true)
       );
 
-      if (seatingType) {
-        console.log("before filter", newData);
-        newData = newData.filter(
-          (cafe) => cafe.properties.hasOutdoorSeating === true
-        );
-        console.log("after filter", newData);
-      }
+      console.log("data", newData);
       setFilteredData(newData);
     }
   }, [seatingType, estabType, suburb, showAll]);

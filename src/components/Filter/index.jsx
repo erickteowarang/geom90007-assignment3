@@ -35,7 +35,6 @@ const Filter = ({
 
   // Handle establishment Change
   const handleEstabChange = (value) => {
-    console.log(value);
     setEstabType(value);
   };
 
