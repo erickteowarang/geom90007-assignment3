@@ -1,8 +1,10 @@
 .cluster-marker {
+  font-size: 12px;
   color: #fff;
-  background: #ba752b;
+  background: #51bbd6;
   border-radius: 50%;
-  padding: 10px;
+  /* height: 36px;
+  width: 36px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,20 +12,15 @@
 
 .marker-button {
   color: #fff;
-  background: #ad886c;
+  background: #51bbd6;
   text-decoration: none;
   border-radius: 100%;
-  padding: 10px;
+  padding: 7px;
   border: 0;
 }
 
-.landmark-btn {
-  color: #fff;
-  background: blueviolet;
-  text-decoration: none;
-  border-radius: 100%;
-  padding: 10px;
-  border: 0;
+.landmark-button {
+  background:#f28cb1;
 }
 
 .popupLoader {

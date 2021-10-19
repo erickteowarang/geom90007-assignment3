@@ -112,7 +112,7 @@ const Map = ({ filteredData }) => {
       {landmarks.features.map((landmark) => (
         <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
           <button 
-            className="landmark-btn"
+            className="marker-button landmark-button"
             onClick={(e) => {
               e.preventDefault();
               setSelectedLandmark(landmark);
@@ -139,11 +139,22 @@ const Map = ({ filteredData }) => {
         const { cluster: isCluster, point_count: pointCount } =
           cluster.properties;
 
+          console.log(pointCount);
+          console.log(filteredData.length);
+
         if (isCluster) {
           return (
-            <Marker key={cluster.id} latitude={latitude} longitude={longitude}>
+            <Marker 
+              key={cluster.id}
+              latitude={latitude}
+              longitude={longitude}
+            >
               <div
                 className="cluster-marker"
+                style={{
+                  width: `${25 + (pointCount / filteredData.length) * 180}px`,
+                  height: `${25 + (pointCount / filteredData.length) * 180}px`
+                }}
                 onClick={() => {
                   const expansionZoom = Math.min(
                     supercluster.getClusterExpansionZoom(cluster.id),

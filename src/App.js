@@ -4,9 +4,7 @@ import Map from "./components/Map";
 import Filter from "./components/Filter";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
-
 import { initialisePlacesData } from "./util";
-import { truncate } from "lodash";
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
