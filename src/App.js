@@ -4,44 +4,49 @@ import Map from "./components/Map";
 import Filter from "./components/Filter";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
-import { initialisePlacesData } from "./util";
+import { initialisePlacesData, getEstablishments, getLandmarkThemes, initialiseLandmarkData } from "./util";
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
   const [seatingType, setSeatingType] = useState(true);
-  const [estabType, setEstabType] = useState(["Cafes and Restaurants"]);
+  const [estabType, setEstabType] = useState(getEstablishments());
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
-  const [showAll, setShowAll] = useState(false);
+  const [landmarkData, setLandmarkData] = useState(initialiseLandmarkData());
+  const [landmarkType, setLandmarkType] = useState(getLandmarkThemes());
 
   // Filter logic
   useEffect(() => {
-    const initialData = initialisePlacesData();
-    if (showAll) {
-      setFilteredData(initialData);
-    } else {
-      let newData = initialData.filter(location => 
+      const filteredEstabData = initialisePlacesData().filter(location => 
         estabType.includes(location.properties.establishmentType) &&
         (suburb === "All" || location.properties.suburb === suburb) &&
         (!seatingType || location.properties.hasOutdoorSeating === true)
       );
 
-      console.log("data", newData);
-      setFilteredData(newData);
-    }
-  }, [seatingType, estabType, suburb, showAll]);
+      setFilteredData(filteredEstabData);
+  }, [seatingType, estabType, suburb]);
+
+  // Filter logic
+  useEffect(() => {
+      const filteredLandmarkData = initialiseLandmarkData().filter(landmark => 
+        landmarkType.includes(landmark.Theme)
+      );
+
+      setLandmarkData(filteredLandmarkData);
+  }, [landmarkType]);
 
   return (
     <ChakraProvider>
       <Filter
         suburb={suburb}
         estab={estabType}
+        landmarkType={landmarkType}
         seatingType={seatingType}
         setSuburb={setSuburb}
         setSeatingType={setSeatingType}
         setEstabType={setEstabType}
-        setShowAll={setShowAll}
+        setLandmarkType={setLandmarkType}
       />
-      <Map filteredData={filteredData} />
+      <Map filteredData={filteredData} landmarkData={landmarkData} />
     </ChakraProvider>
   );
 };

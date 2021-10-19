@@ -1,5 +1,6 @@
 import { uniqBy } from "lodash";
 import * as cafeData from "../data/cafe-restaurants-2019.json";
+import * as landmarks from "../data/landmarks.json";
 
 // Obtains a unique list for the suburb dropdown box
 export const getSuburbs = () => [
@@ -13,6 +14,13 @@ export const getEstablishments = () => [
   ),
 ];
 
+
+// Obtains a unique list for landmark themes
+export const getLandmarkThemes = () => [
+  ...new Set(
+    landmarks.features.map(landmark => landmark.Theme)
+  ),
+];
 
 /*  
   Function to check if a given location has outdoor seating
@@ -50,3 +58,5 @@ export const initialisePlacesData = () => {
   
   return sanitisedData;
 }
+
+export const initialiseLandmarkData = () => landmarks.features

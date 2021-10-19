@@ -3,12 +3,11 @@ import React, { useRef, useState, useEffect } from "react";
 import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
 import BeatLoader from "react-spinners/BeatLoader";
 import useSupercluster from "use-supercluster";
-import * as landmarks from "../../data/landmarks.json";
 
 import Loader from '../Loader';
 import "./Map.css";
 
-const Map = ({ filteredData }) => {
+const Map = ({ filteredData, landmarkData }) => {
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [selectedLandmark, setSelectedLandmark] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -109,7 +108,7 @@ const Map = ({ filteredData }) => {
       mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
       ref={mapRef}
     >
-      {landmarks.features.map((landmark) => (
+      {landmarkData.map(landmark => (
         <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
           <button 
             className="marker-button landmark-button"
