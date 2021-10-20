@@ -60,3 +60,25 @@ export const initialisePlacesData = () => {
 }
 
 export const initialiseLandmarkData = () => landmarks.features
+
+export const getAddressFromGeocode = geocode => {
+  const geocoder = new google.maps.Geocoder();
+
+  const latlng = {
+    lat: parseFloat(geocode.lat),
+    lng: parseFloat(geocode.lng),
+  };
+
+  return new Promise((resolve, reject) => {
+    geocoder
+      .geocode({ location: latlng })
+      .then((response) => {
+        if (response.results[0]) {
+          resolve(response.results[0].formatted_address);
+        } else {
+          resolve("No address found for this landmark.");
+        }
+      })
+      .catch((e) => reject("Geocoder failed due to: " + e));
+  });
+}

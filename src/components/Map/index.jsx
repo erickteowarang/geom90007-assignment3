@@ -1,10 +1,11 @@
-/* eslint-disable no-undef */
 import React, { useRef, useState, useEffect } from "react";
-import ReactMapGL, { Marker, FlyToInterpolator, Popup } from "react-map-gl";
-import BeatLoader from "react-spinners/BeatLoader";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
 import useSupercluster from "use-supercluster";
 
 import Loader from '../Loader';
+import Popup from '../Popup';
+import { getAddressFromGeocode } from "../../util";
 import "./Map.css";
 
 const Map = ({ filteredData, landmarkData }) => {
@@ -23,6 +24,7 @@ const Map = ({ filteredData, landmarkData }) => {
 
   const getCafeDetails = (cluster) => {
     setIsPopupLoading(true);
+    setSelectedLandmark(null);
     setSelectedCafe({
       latitude: cluster.geometry.coordinates[1],
       longitude: cluster.geometry.coordinates[0],
@@ -64,6 +66,27 @@ const Map = ({ filteredData, landmarkData }) => {
       }
     });
   };
+
+  const getLandmarkDetails = async landmark => {
+    setIsPopupLoading(true);
+    setSelectedCafe(null);
+    setSelectedLandmark({
+      Latitude: landmark.Latitude,
+      Longitude: landmark.Longitude,
+    });
+    
+    if (!landmark.address) {
+      const landmarkAddress = await getAddressFromGeocode({
+        lat: landmark.Latitude,
+        lng: landmark.Longitude,
+      });
+
+      landmark.address = landmarkAddress;
+    }
+    
+    setSelectedLandmark(landmark);
+    setIsPopupLoading(false);
+  }
 
   useEffect(() => {
     const listener = (e) => {
@@ -112,34 +135,36 @@ const Map = ({ filteredData, landmarkData }) => {
         <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
           <button 
             className="marker-button landmark-button"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
-              setSelectedLandmark(landmark);
+              getLandmarkDetails(landmark);
             }}
           >
           </button>
         </Marker>
       ))}
-      {selectedLandmark ? (
+      {selectedLandmark && (
         <Popup 
           latitude={selectedLandmark.Latitude} 
           longitude = {selectedLandmark.Longitude}
           onClose={() => {
             setSelectedLandmark(null);
-          }}>
-          <div>
-            <h2>{selectedLandmark["Feature Name"]}</h2>
-          </div>
-        </Popup>
-      ) : null}
+          }}
+          isLoading={isPopupLoading}
+          heading={selectedLandmark["Feature Name"]}
+          content={(
+            <>
+              <Text fontSize="md"><strong>Address:</strong> {selectedLandmark.address}</Text>
+              <Text fontSize="md"><strong>Landmark Type:</strong> {selectedLandmark.Theme} - {selectedLandmark["Sub Theme"]}</Text>
+            </>
+          )}
+        />
+      )}
       
       {clusters.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const { cluster: isCluster, point_count: pointCount } =
           cluster.properties;
-
-          console.log(pointCount);
-          console.log(filteredData.length);
 
         if (isCluster) {
           return (
@@ -201,27 +226,23 @@ const Map = ({ filteredData, landmarkData }) => {
           onClose={() => {
             setSelectedCafe(null);
           }}
-        >
-          {isPopupLoading ? (
-            <div className="popupLoader">
-              <BeatLoader color="#36D7B7" size={12} />
-            </div>
-          ) : (
-            <div>
-              <h2>{selectedCafe.name}</h2>
-              <p>{selectedCafe.address}</p>
-              <p>Rating: {selectedCafe.rating}</p>
-              <p>
-                Currently Open:{" "}
+          isLoading={isPopupLoading}
+          heading={selectedCafe.name}
+          content={(
+            <>
+              <Text fontSize="md">{selectedCafe.address}</Text>
+              <Text fontSize="md"><strong>Rating</strong>: {selectedCafe.rating}/5</Text>
+              <Text fontSize="md">
+                <strong>Currently Open:</strong>{" "}
                 {selectedCafe.opening_hours &&
                 selectedCafe.opening_hours.open_now
                   ? "Yes"
                   : "No"}
-              </p>
-              <p>Has outdoor seating: {selectedCafe.hasOutdoorSeating}</p>
-            </div>
+              </Text>
+              <Text fontSize="md"><strong>Has outdoor seating:</strong> {selectedCafe.hasOutdoorSeating}</Text>
+            </>
           )}
-        </Popup>
+        />
       )}
     </ReactMapGL>
   );
