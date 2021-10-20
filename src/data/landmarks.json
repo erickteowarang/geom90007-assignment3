@@ -4,862 +4,862 @@
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office/Carpark",
     "Feature Name": "Council House 2 (CH2)",
-    "Latitude": -37.81425914,
-    "Longitude": 144.9666384
+    "latitude": -37.81425914,
+    "longitude": 144.9666384
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Library",
     "Feature Name": "The Melbourne Athenaeum Library",
-    "Latitude": -37.81488558,
-    "Longitude": 144.9672913
+    "latitude": -37.81488558,
+    "longitude": 144.9672913
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Carlton Gardens South",
-    "Latitude": -37.80606846,
-    "Longitude": 144.9712665
+    "latitude": -37.80606846,
+    "longitude": 144.9712665
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Visitor Centre",
     "Feature Name": "Melbourne Visitor Booth",
-    "Latitude": -37.81395251,
-    "Longitude": 144.9644259
+    "latitude": -37.81395251,
+    "longitude": 144.9644259
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "State Netball Hockey Centre",
-    "Latitude": -37.785786,
-    "Longitude": 144.947581
+    "latitude": -37.785786,
+    "longitude": 144.947581
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "University Square",
-    "Latitude": -37.80041071,
-    "Longitude": 144.9603983
+    "latitude": -37.80041071,
+    "longitude": 144.9603983
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Private Sports Club/Facility",
     "Feature Name": "Royal Park Golf Course",
-    "Latitude": -37.78191713,
-    "Longitude": 144.9563091
+    "latitude": -37.78191713,
+    "longitude": 144.9563091
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Powlett Reserve",
-    "Latitude": -37.81169299,
-    "Longitude": 144.9872757
+    "latitude": -37.81169299,
+    "longitude": 144.9872757
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Carlton Football Club",
-    "Latitude": -37.78408644,
-    "Longitude": 144.9619678
+    "latitude": -37.78408644,
+    "longitude": 144.9619678
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Visy Park",
-    "Latitude": -37.78343039,
-    "Longitude": 144.9619826
+    "latitude": -37.78343039,
+    "longitude": 144.9619826
   },
   {
     "Theme": "Retail",
     "Sub Theme": "Retail",
     "Feature Name": "Queen Victoria Market",
-    "Latitude": -37.8075002,
-    "Longitude": 144.9571585
+    "latitude": -37.8075002,
+    "longitude": 144.9571585
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Carlton Gardens North",
-    "Latitude": -37.80176908,
-    "Longitude": 144.9719976
+    "latitude": -37.80176908,
+    "longitude": 144.9719976
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Old Melbourne Gaol Crime & Justice Experience",
-    "Latitude": -37.80776441,
-    "Longitude": 144.9654639
+    "latitude": -37.80776441,
+    "longitude": 144.9654639
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Kings Domain",
-    "Latitude": -37.82552398,
-    "Longitude": 144.9741079
+    "latitude": -37.82552398,
+    "longitude": 144.9741079
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "FairFax Studio",
-    "Latitude": -37.82166846,
-    "Longitude": 144.9688362
+    "latitude": -37.82166846,
+    "longitude": 144.9688362
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Playhouse",
-    "Latitude": -37.82181246,
-    "Longitude": 144.9683378
+    "latitude": -37.82181246,
+    "longitude": 144.9683378
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "State Theatre",
-    "Latitude": -37.82128063,
-    "Longitude": 144.9684696
+    "latitude": -37.82128063,
+    "longitude": 144.9684696
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "St Martins Youth Arts Centre",
-    "Latitude": -37.83524295,
-    "Longitude": 144.9811422
+    "latitude": -37.83524295,
+    "longitude": 144.9811422
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Flemington Racecourse",
-    "Latitude": -37.79080826,
-    "Longitude": 144.912143
+    "latitude": -37.79080826,
+    "longitude": 144.912143
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Princess Theatre",
-    "Latitude": -37.81072571,
-    "Longitude": 144.9723266
+    "latitude": -37.81072571,
+    "longitude": 144.9723266
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Treasury Gardens",
-    "Latitude": -37.81439936,
-    "Longitude": 144.9759523
+    "latitude": -37.81439936,
+    "longitude": 144.9759523
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "State Library Victoria",
-    "Latitude": -37.80998522,
-    "Longitude": 144.9643303
+    "latitude": -37.80998522,
+    "longitude": 144.9643303
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Regent Theatre",
-    "Latitude": -37.81600147,
-    "Longitude": 144.9679167
+    "latitude": -37.81600147,
+    "longitude": 144.9679167
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office",
     "Feature Name": "Treasury Reserve",
-    "Latitude": -37.81291788,
-    "Longitude": 144.9752368
+    "latitude": -37.81291788,
+    "longitude": 144.9752368
   },
   {
     "Theme": "Health Services",
     "Sub Theme": "Private Hospital",
     "Feature Name": "Epworth Freemasons Hospital : Medical Centre",
-    "Latitude": -37.80934446,
-    "Longitude": 144.9823368
+    "latitude": -37.80934446,
+    "longitude": 144.9823368
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Batman Park",
-    "Latitude": -37.82184609,
-    "Longitude": 144.9566658
+    "latitude": -37.82184609,
+    "longitude": 144.9566658
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Melbourne Cricket Ground (MCG)",
-    "Latitude": -37.81949216,
-    "Longitude": 144.9834029
+    "latitude": -37.81949216,
+    "longitude": 144.9834029
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Outdoor Recreation Facility (Zoo, Golf Course)",
     "Feature Name": "Melbourne Zoo",
-    "Latitude": -37.78444493,
-    "Longitude": 144.9513712
+    "latitude": -37.78444493,
+    "longitude": 144.9513712
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Function/Conference/Exhibition Centre",
     "Feature Name": "Melbourne Convention Centre",
-    "Latitude": -37.82490405,
-    "Longitude": 144.9522883
+    "latitude": -37.82490405,
+    "longitude": 144.9522883
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Polly Woodside",
-    "Latitude": -37.82425743,
-    "Longitude": 144.9534781
+    "latitude": -37.82425743,
+    "longitude": 144.9534781
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Australian Centre for Contemporary Art",
-    "Latitude": -37.82660454,
-    "Longitude": 144.9672529
+    "latitude": -37.82660454,
+    "longitude": 144.9672529
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Malthouse Theatre",
-    "Latitude": -37.8271768,
-    "Longitude": 144.9669368
+    "latitude": -37.8271768,
+    "longitude": 144.9669368
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Victorian Arts Centre",
-    "Latitude": -37.82199473,
-    "Longitude": 144.9688373
+    "latitude": -37.82199473,
+    "longitude": 144.9688373
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "Melbourne Town Hall",
-    "Latitude": -37.81507548,
-    "Longitude": 144.9665427
+    "latitude": -37.81507548,
+    "longitude": 144.9665427
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office",
     "Feature Name": "DFO South Wharf",
-    "Latitude": -37.8248874,
-    "Longitude": 144.9497943
+    "latitude": -37.8248874,
+    "longitude": 144.9497943
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Queen Victoria Gardens",
-    "Latitude": -37.82163812,
-    "Longitude": 144.9710495
+    "latitude": -37.82163812,
+    "longitude": 144.9710495
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "Sidney Myer Music Bowl",
-    "Latitude": -37.82334716,
-    "Longitude": 144.9746862
+    "latitude": -37.82334716,
+    "longitude": 144.9746862
   },
   {
     "Theme": "Purpose Built",
     "Sub Theme": "Casino",
     "Feature Name": "Crown Entertainment Complex",
-    "Latitude": -37.82357611,
-    "Longitude": 144.9573129
+    "latitude": -37.82357611,
+    "longitude": 144.9573129
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "The Ian Potter Centre: NGV Australia",
-    "Latitude": -37.81748314,
-    "Longitude": 144.969899
+    "latitude": -37.81748314,
+    "longitude": 144.969899
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Federation Square",
-    "Latitude": -37.81785166,
-    "Longitude": 144.9689636
+    "latitude": -37.81785166,
+    "longitude": 144.9689636
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Thoroughbred Racing Gallery",
-    "Latitude": -37.81886627,
-    "Longitude": 144.9839701
+    "latitude": -37.81886627,
+    "longitude": 144.9839701
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "New Quay",
-    "Latitude": -37.81521788,
-    "Longitude": 144.9416179
+    "latitude": -37.81521788,
+    "longitude": 144.9416179
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Docklands Park",
-    "Latitude": -37.82099568,
-    "Longitude": 144.9467817
+    "latitude": -37.82099568,
+    "longitude": 144.9467817
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office",
     "Feature Name": "Waterfront City",
-    "Latitude": -37.81505666,
-    "Longitude": 144.9391369
+    "latitude": -37.81505666,
+    "longitude": 144.9391369
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "AAMI Park",
-    "Latitude": -37.82472527,
-    "Longitude": 144.983803
+    "latitude": -37.82472527,
+    "longitude": 144.983803
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Observation Tower/Wheel",
     "Feature Name": "Melbourne Star Observation Wheel",
-    "Latitude": -37.81161637,
-    "Longitude": 144.9375889
+    "latitude": -37.81161637,
+    "longitude": 144.9375889
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Fox Classic Car Collection",
-    "Latitude": -37.82137443,
-    "Longitude": 144.9484967
+    "latitude": -37.82137443,
+    "longitude": 144.9484967
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Outdoor Recreation Facility (Zoo, Golf Course)",
     "Feature Name": "Wonderland Park",
-    "Latitude": -37.81169454,
-    "Longitude": 144.9368337
+    "latitude": -37.81169454,
+    "longitude": 144.9368337
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Rod Laver Arena",
-    "Latitude": -37.82204561,
-    "Longitude": 144.9784872
+    "latitude": -37.82204561,
+    "longitude": 144.9784872
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Melbourne Park",
-    "Latitude": -37.8209086,
-    "Longitude": 144.9787358
+    "latitude": -37.8209086,
+    "longitude": 144.9787358
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Margaret Court Arena",
-    "Latitude": -37.82132521,
-    "Longitude": 144.9775911
+    "latitude": -37.82132521,
+    "longitude": 144.9775911
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Hisense Arena",
-    "Latitude": -37.82311,
-    "Longitude": 144.9818348
+    "latitude": -37.82311,
+    "longitude": 144.9818348
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Melbourne Museum",
-    "Latitude": -37.80355181,
-    "Longitude": 144.9716907
+    "latitude": -37.80355181,
+    "longitude": 144.9716907
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Cinema",
     "Feature Name": "IMAX Melbourne",
-    "Latitude": -37.80343156,
-    "Longitude": 144.9706399
+    "latitude": -37.80343156,
+    "longitude": 144.9706399
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "MTC Theatre",
-    "Latitude": -37.82426618,
-    "Longitude": 144.9681744
+    "latitude": -37.82426618,
+    "longitude": 144.9681744
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "NGV International",
-    "Latitude": -37.8230135,
-    "Longitude": 144.9693425
+    "latitude": -37.8230135,
+    "longitude": 144.9693425
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Hamer Hall",
-    "Latitude": -37.8199901,
-    "Longitude": 144.9679921
+    "latitude": -37.8199901,
+    "longitude": 144.9679921
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Birrarung Marr",
-    "Latitude": -37.81806108,
-    "Longitude": 144.9731467
+    "latitude": -37.81806108,
+    "longitude": 144.9731467
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Indoor Recreation Facility",
     "Feature Name": "Artplay",
-    "Latitude": -37.81841988,
-    "Longitude": 144.9715426
+    "latitude": -37.81841988,
+    "longitude": 144.9715426
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Riverslide Skate Park",
-    "Latitude": -37.82078871,
-    "Longitude": 144.9729518
+    "latitude": -37.82078871,
+    "longitude": 144.9729518
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Alexandra Gardens",
-    "Latitude": -37.82060514,
-    "Longitude": 144.9717961
+    "latitude": -37.82060514,
+    "longitude": 144.9717961
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "North Melbourne Recreation Reserve",
-    "Latitude": -37.79883453,
-    "Longitude": 144.9414521
+    "latitude": -37.79883453,
+    "longitude": 144.9414521
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "J.J Holland Park",
-    "Latitude": -37.79823588,
-    "Longitude": 144.9238371
+    "latitude": -37.79823588,
+    "longitude": 144.9238371
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Royal Park",
-    "Latitude": -37.79061743,
-    "Longitude": 144.9538342
+    "latitude": -37.79061743,
+    "longitude": 144.9538342
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Princes Park",
-    "Latitude": -37.78701617,
-    "Longitude": 144.9611152
+    "latitude": -37.78701617,
+    "longitude": 144.9611152
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "National Sports Museum",
-    "Latitude": -37.81895449,
-    "Longitude": 144.9846698
+    "latitude": -37.81895449,
+    "longitude": 144.9846698
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Shrine of Rembrance Reserve",
-    "Latitude": -37.8320734,
-    "Longitude": 144.9736284
+    "latitude": -37.8320734,
+    "longitude": 144.9736284
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "Shrine of Remembrance",
-    "Latitude": -37.830208,
-    "Longitude": 144.9734419
+    "latitude": -37.830208,
+    "longitude": 144.9734419
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Royal Botanic Gardens",
-    "Latitude": -37.83066316,
-    "Longitude": 144.9808504
+    "latitude": -37.83066316,
+    "longitude": 144.9808504
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Yarra Park",
-    "Latitude": -37.82046937,
-    "Longitude": 144.9866711
+    "latitude": -37.82046937,
+    "longitude": 144.9866711
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Indoor Recreation Facility",
     "Feature Name": "Icehouse",
-    "Latitude": -37.81218812,
-    "Longitude": 144.935684
+    "latitude": -37.81218812,
+    "longitude": 144.935684
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Athanaeum Theatre",
-    "Latitude": -37.81495435,
-    "Longitude": 144.9673225
+    "latitude": -37.81495435,
+    "longitude": 144.9673225
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Outdoor Recreation Facility (Zoo, Golf Course)",
     "Feature Name": "Riverside Park",
-    "Latitude": -37.79483753,
-    "Longitude": 144.9156071
+    "latitude": -37.79483753,
+    "longitude": 144.9156071
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Darling Square",
-    "Latitude": -37.81299207,
-    "Longitude": 144.9890626
+    "latitude": -37.81299207,
+    "longitude": 144.9890626
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Carlton Courthouse Theatre",
-    "Latitude": -37.79765899,
-    "Longitude": 144.9687501
+    "latitude": -37.79765899,
+    "longitude": 144.9687501
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Flagstaff Gardens",
-    "Latitude": -37.81112229,
-    "Longitude": 144.9546961
+    "latitude": -37.81112229,
+    "longitude": 144.9546961
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Outdoor Recreation Facility (Zoo, Golf Course)",
     "Feature Name": "Melbourne Showgrounds",
-    "Latitude": -37.78230979,
-    "Longitude": 144.9108221
+    "latitude": -37.78230979,
+    "longitude": 144.9108221
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Her Majesty's Theatre",
-    "Latitude": -37.81099756,
-    "Longitude": 144.9695202
+    "latitude": -37.81099756,
+    "longitude": 144.9695202
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Comedy Theatre",
-    "Latitude": -37.81020539,
-    "Longitude": 144.9701331
+    "latitude": -37.81020539,
+    "longitude": 144.9701331
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "La Mama Theatre",
-    "Latitude": -37.7991305,
-    "Longitude": 144.9676695
+    "latitude": -37.7991305,
+    "longitude": 144.9676695
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Fawkner Park",
-    "Latitude": -37.84139967,
-    "Longitude": 144.9816257
+    "latitude": -37.84139967,
+    "longitude": 144.9816257
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Fitzroy Gardens",
-    "Latitude": -37.81296163,
-    "Longitude": 144.9804557
+    "latitude": -37.81296163,
+    "longitude": 144.9804557
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Sinclair's Cottage",
-    "Latitude": -37.81454075,
-    "Longitude": 144.980555
+    "latitude": -37.81454075,
+    "longitude": 144.980555
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Enterprize Park",
-    "Latitude": -37.82021027,
-    "Longitude": 144.9592769
+    "latitude": -37.82021027,
+    "longitude": 144.9592769
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Victoria Police Museum",
-    "Latitude": -37.82221828,
-    "Longitude": 144.95404
+    "latitude": -37.82221828,
+    "longitude": 144.95404
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Immigration Museum",
-    "Latitude": -37.81917988,
-    "Longitude": 144.9604268
+    "latitude": -37.81917988,
+    "longitude": 144.9604268
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Theatre Live",
     "Feature Name": "Forum Theatre",
-    "Latitude": -37.81648541,
-    "Longitude": 144.9693866
+    "latitude": -37.81648541,
+    "longitude": 144.9693866
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office/Carpark",
     "Feature Name": "Melbourne Wholesale Fruit, Vegetable & Flower Market",
-    "Latitude": -37.80687252,
-    "Longitude": 144.9232874
+    "latitude": -37.80687252,
+    "longitude": 144.9232874
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Fire Services Museum Victoria",
-    "Latitude": -37.80857613,
-    "Longitude": 144.9753737
+    "latitude": -37.80857613,
+    "longitude": 144.9753737
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Fire Station",
     "Feature Name": "Metropolitan Fire Brigade (MFB)",
-    "Latitude": -37.80923186,
-    "Longitude": 144.9752476
+    "latitude": -37.80923186,
+    "longitude": 144.9752476
   },
   {
     "Theme": "Health Services",
     "Sub Theme": "Public Hospital",
     "Feature Name": "Royal Melbourne Hospital",
-    "Latitude": -37.79930717,
-    "Longitude": 144.9563897
+    "latitude": -37.79930717,
+    "longitude": 144.9563897
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "The Ian Potter Museum Of Art",
-    "Latitude": -37.79739396,
-    "Longitude": 144.9641567
+    "latitude": -37.79739396,
+    "longitude": 144.9641567
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Koorie Heritage Trust Inc",
-    "Latitude": -37.81338543,
-    "Longitude": 144.9540279
+    "latitude": -37.81338543,
+    "longitude": 144.9540279
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "Commonwealth Law Courts",
-    "Latitude": -37.81239617,
-    "Longitude": 144.9558238
+    "latitude": -37.81239617,
+    "longitude": 144.9558238
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office/Carpark",
     "Feature Name": "Melbourne Central",
-    "Latitude": -37.81053718,
-    "Longitude": 144.9627497
+    "latitude": -37.81053718,
+    "longitude": 144.9627497
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office/Residential/Carpark",
     "Feature Name": "QV Village",
-    "Latitude": -37.81068919,
-    "Longitude": 144.9657146
+    "latitude": -37.81068919,
+    "longitude": 144.9657146
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Argyle Square",
-    "Latitude": -37.80314806,
-    "Longitude": 144.9657613
+    "latitude": -37.80314806,
+    "longitude": 144.9657613
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Piazza Italia",
-    "Latitude": -37.80251642,
-    "Longitude": 144.9658631
+    "latitude": -37.80251642,
+    "longitude": 144.9658631
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Macarthur Square",
-    "Latitude": -37.79833187,
-    "Longitude": 144.9715141
+    "latitude": -37.79833187,
+    "longitude": 144.9715141
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Murchinson Square",
-    "Latitude": -37.8002735,
-    "Longitude": 144.9730593
+    "latitude": -37.8002735,
+    "longitude": 144.9730593
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Parliament Reserve",
-    "Latitude": -37.80985262,
-    "Longitude": 144.9734622
+    "latitude": -37.80985262,
+    "longitude": 144.9734622
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "North Melbourne Recreation Centre (Aquatic)",
-    "Latitude": -37.799947,
-    "Longitude": 144.9432908
+    "latitude": -37.799947,
+    "longitude": 144.9432908
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Gymnasium/Health Club",
     "Feature Name": "North Melbourne Recreation Centre (Gymnasium)",
-    "Latitude": -37.79970512,
-    "Longitude": 144.9403683
+    "latitude": -37.79970512,
+    "longitude": 144.9403683
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Indoor Recreation Facility",
     "Feature Name": "Carlton Baths",
-    "Latitude": -37.7934377,
-    "Longitude": 144.9716965
+    "latitude": -37.7934377,
+    "longitude": 144.9716965
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "City Baths",
-    "Latitude": -37.80715854,
-    "Longitude": 144.9631898
+    "latitude": -37.80715854,
+    "longitude": 144.9631898
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Westgate Park",
-    "Latitude": -37.83149186,
-    "Longitude": 144.9088248
+    "latitude": -37.83149186,
+    "longitude": 144.9088248
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Cooks' Cottage",
-    "Latitude": -37.81446049,
-    "Longitude": 144.9794713
+    "latitude": -37.81446049,
+    "longitude": 144.9794713
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Public Buildings",
     "Feature Name": "Conservatory",
-    "Latitude": -37.81400213,
-    "Longitude": 144.9785597
+    "latitude": -37.81400213,
+    "longitude": 144.9785597
   },
   {
     "Theme": "Purpose Built",
     "Sub Theme": "Aquarium",
     "Feature Name": "Melbourne Aquarium",
-    "Latitude": -37.82096278,
-    "Longitude": 144.9584257
+    "latitude": -37.82096278,
+    "longitude": 144.9584257
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Westpac Centre",
-    "Latitude": -37.82424569,
-    "Longitude": 144.9797203
+    "latitude": -37.82424569,
+    "longitude": 144.9797203
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Royal Exhibition Building",
-    "Latitude": -37.80460262,
-    "Longitude": 144.9715219
+    "latitude": -37.80460262,
+    "longitude": 144.9715219
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Major Sports & Recreation Facility",
     "Feature Name": "Etihad Stadium",
-    "Latitude": -37.81617605,
-    "Longitude": 144.9474963
+    "latitude": -37.81617605,
+    "longitude": 144.9474963
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Observation Tower/Wheel",
     "Feature Name": "Eureka Skydeck 88",
-    "Latitude": -37.82161876,
-    "Longitude": 144.9646222
+    "latitude": -37.82161876,
+    "longitude": 144.9646222
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Residential",
     "Feature Name": "Eureka Tower",
-    "Latitude": -37.82151575,
-    "Longitude": 144.9644567
+    "latitude": -37.82151575,
+    "longitude": 144.9644567
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Sandridge Rail Bridge",
-    "Latitude": -37.8201763,
-    "Longitude": 144.9629811
+    "latitude": -37.8201763,
+    "longitude": 144.9629811
   },
   {
     "Theme": "Mixed Use",
     "Sub Theme": "Retail/Office/Residential/Carpark",
     "Feature Name": "Freshwater Place",
-    "Latitude": -37.82197455,
-    "Longitude": 144.9624614
+    "latitude": -37.82197455,
+    "longitude": 144.9624614
   },
   {
     "Theme": "Community Use",
     "Sub Theme": "Visitor Centre",
     "Feature Name": "Melbourne Visitor Centre",
-    "Latitude": -37.81773524,
-    "Longitude": 144.9679371
+    "latitude": -37.81773524,
+    "longitude": 144.9679371
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "Australian Centre For The Moving Image (ACMI)",
-    "Latitude": -37.81761073,
-    "Longitude": 144.9690704
+    "latitude": -37.81761073,
+    "longitude": 144.9690704
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Function/Conference/Exhibition Centre",
     "Feature Name": "Dallas Brooks Centre",
-    "Latitude": -37.80973741,
-    "Longitude": 144.9813834
+    "latitude": -37.80973741,
+    "longitude": 144.9813834
   },
   {
     "Theme": "Retail",
     "Sub Theme": "Department Store",
     "Feature Name": "Myer",
-    "Latitude": -37.8135912,
-    "Longitude": 144.9638551
+    "latitude": -37.8135912,
+    "longitude": 144.9638551
   },
   {
     "Theme": "Retail",
     "Sub Theme": "Department Store",
     "Feature Name": "David Jones",
-    "Latitude": -37.81331273,
-    "Longitude": 144.9643735
+    "latitude": -37.81331273,
+    "longitude": 144.9643735
   },
   {
     "Theme": "Leisure/Recreation",
     "Sub Theme": "Informal Outdoor Facility (Park/Garden/Reserve)",
     "Feature Name": "Lincoln Square",
-    "Latitude": -37.80279197,
-    "Longitude": 144.9627609
+    "latitude": -37.80279197,
+    "longitude": 144.9627609
   },
   {
     "Theme": "Place Of Assembly",
     "Sub Theme": "Art Gallery/Museum",
     "Feature Name": "The Museum Of Australian Chinese History",
-    "Latitude": -37.81076861,
-    "Longitude": 144.9692339
+    "latitude": -37.81076861,
+    "longitude": 144.9692339
   }
   ]
 }

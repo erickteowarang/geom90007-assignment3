@@ -4,17 +4,24 @@ import Map from "./components/Map";
 import Filter from "./components/Filter";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
-import { initialisePlacesData, getEstablishments, getLandmarkThemes, initialiseLandmarkData } from "./util";
+import { 
+  initialiseBathroomData,
+  initialiseLandmarkData,
+  initialisePlacesData,
+  getEstablishments,
+  getLandmarkThemes
+} from "./util";
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
   const [seatingType, setSeatingType] = useState(true);
   const [estabType, setEstabType] = useState(getEstablishments());
+  const [bathroomData, setBathroomData] = useState(initialiseBathroomData());
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
   const [landmarkData, setLandmarkData] = useState(initialiseLandmarkData());
   const [landmarkType, setLandmarkType] = useState(getLandmarkThemes());
 
-  // Filter logic
+  // Businesses filter logic
   useEffect(() => {
       const filteredEstabData = initialisePlacesData().filter(location => 
         estabType.includes(location.properties.establishmentType) &&
@@ -25,7 +32,7 @@ const App = () => {
       setFilteredData(filteredEstabData);
   }, [seatingType, estabType, suburb]);
 
-  // Filter logic
+  // Landmark filter logic
   useEffect(() => {
       const filteredLandmarkData = initialiseLandmarkData().filter(landmark => 
         landmarkType.includes(landmark.Theme)
@@ -46,7 +53,11 @@ const App = () => {
         setEstabType={setEstabType}
         setLandmarkType={setLandmarkType}
       />
-      <Map filteredData={filteredData} landmarkData={landmarkData} />
+      <Map
+        bathroomData={bathroomData}
+        filteredData={filteredData}
+        landmarkData={landmarkData}
+      />
     </ChakraProvider>
   );
 };

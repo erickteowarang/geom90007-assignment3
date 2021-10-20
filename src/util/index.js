@@ -1,6 +1,7 @@
 import { uniqBy } from "lodash";
 import * as cafeData from "../data/cafe-restaurants-2019.json";
 import * as landmarks from "../data/landmarks.json";
+import * as bathrooms from "../data/bathrooms.json";
 
 // Obtains a unique list for the suburb dropdown box
 export const getSuburbs = () => [
@@ -59,7 +60,7 @@ export const initialisePlacesData = () => {
   return sanitisedData;
 }
 
-export const initialiseLandmarkData = () => landmarks.features
+export const initialiseLandmarkData = () => landmarks.features;
 
 export const getAddressFromGeocode = geocode => {
   const geocoder = new google.maps.Geocoder();
@@ -82,3 +83,5 @@ export const getAddressFromGeocode = geocode => {
       .catch((e) => reject("Geocoder failed due to: " + e));
   });
 }
+
+export const initialiseBathroomData = () => bathrooms.features;

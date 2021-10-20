@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
+import { upperFirst } from "lodash";
 import useSupercluster from "use-supercluster";
 
 import Loader from '../Loader';
@@ -8,7 +9,8 @@ import Popup from '../Popup';
 import { getAddressFromGeocode } from "../../util";
 import "./Map.css";
 
-const Map = ({ filteredData, landmarkData }) => {
+const Map = ({ bathroomData, filteredData, landmarkData }) => {
+  const [selectedBathroom, setSelectedBathroom] = useState(null);
   const [selectedCafe, setSelectedCafe] = useState(null);
   const [selectedLandmark, setSelectedLandmark] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +26,7 @@ const Map = ({ filteredData, landmarkData }) => {
 
   const getCafeDetails = (cluster) => {
     setIsPopupLoading(true);
+    setSelectedBathroom(null);
     setSelectedLandmark(null);
     setSelectedCafe({
       latitude: cluster.geometry.coordinates[1],
@@ -69,16 +72,17 @@ const Map = ({ filteredData, landmarkData }) => {
 
   const getLandmarkDetails = async landmark => {
     setIsPopupLoading(true);
+    setSelectedBathroom(null);
     setSelectedCafe(null);
     setSelectedLandmark({
-      Latitude: landmark.Latitude,
-      Longitude: landmark.Longitude,
+      latitude: landmark.latitude,
+      longitude: landmark.longitude,
     });
     
     if (!landmark.address) {
       const landmarkAddress = await getAddressFromGeocode({
-        lat: landmark.Latitude,
-        lng: landmark.Longitude,
+        lat: landmark.latitude,
+        lng: landmark.longitude,
       });
 
       landmark.address = landmarkAddress;
@@ -132,7 +136,7 @@ const Map = ({ filteredData, landmarkData }) => {
       ref={mapRef}
     >
       {landmarkData.map(landmark => (
-        <Marker key={landmark["Feature Name"]} latitude={landmark.Latitude} longitude={landmark.Longitude}>
+        <Marker key={landmark["Feature Name"]} latitude={landmark.latitude} longitude={landmark.longitude}>
           <button 
             className="marker-button landmark-button"
             onClick={e => {
@@ -145,8 +149,8 @@ const Map = ({ filteredData, landmarkData }) => {
       ))}
       {selectedLandmark && (
         <Popup 
-          latitude={selectedLandmark.Latitude} 
-          longitude = {selectedLandmark.Longitude}
+          latitude={selectedLandmark.latitude} 
+          longitude = {selectedLandmark.longitude}
           onClose={() => {
             setSelectedLandmark(null);
           }}
@@ -156,6 +160,38 @@ const Map = ({ filteredData, landmarkData }) => {
             <>
               <Text fontSize="md"><strong>Address:</strong> {selectedLandmark.address}</Text>
               <Text fontSize="md"><strong>Landmark Type:</strong> {selectedLandmark.Theme} - {selectedLandmark["Sub Theme"]}</Text>
+            </>
+          )}
+        />
+      )}
+
+      {bathroomData.map(bathroom => (
+        <Marker key={bathroom.name} latitude={bathroom.latitude} longitude={bathroom.longitude}>
+          <button 
+            className="marker-button bathroom-button"
+            onClick={e => {
+              e.preventDefault();
+              setSelectedCafe(null);
+              setSelectedLandmark(null);
+              setSelectedBathroom(bathroom);
+            }}
+          >
+          </button>
+        </Marker>
+      ))}
+      {selectedBathroom && (
+        <Popup 
+          latitude={selectedBathroom.latitude} 
+          longitude = {selectedBathroom.longitude}
+          onClose={() => {
+            setSelectedBathroom(null);
+          }}
+          isLoading={isPopupLoading}
+          heading={selectedBathroom.name}
+          content={(
+            <>
+              <Text fontSize="md"><strong>Wheelchair Accessible:</strong> {upperFirst(selectedBathroom.wheelchair)}</Text>
+              <Text fontSize="md"><strong>Has Baby Facilities:</strong> {upperFirst(selectedBathroom.baby_facil)}</Text>
             </>
           )}
         />
@@ -230,8 +266,8 @@ const Map = ({ filteredData, landmarkData }) => {
           heading={selectedCafe.name}
           content={(
             <>
-              <Text fontSize="md">{selectedCafe.address}</Text>
-              <Text fontSize="md"><strong>Rating</strong>: {selectedCafe.rating}/5</Text>
+              <Text fontSize="md"><strong>Address:</strong> {selectedCafe.address}</Text>
+              <Text fontSize="md"><strong>Rating:</strong> {selectedCafe.rating}/5</Text>
               <Text fontSize="md">
                 <strong>Currently Open:</strong>{" "}
                 {selectedCafe.opening_hours &&
