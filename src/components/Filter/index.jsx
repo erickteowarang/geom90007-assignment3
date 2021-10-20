@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { 
   Box,
   Heading,
@@ -14,19 +14,25 @@ import {
 import Select from "react-select";
 import "./Filter.css";
 
-import { getEstablishments, getSuburbs, getLandmarkThemes } from "../../util";
+import { 
+  getEstablishments,
+  getSuburbs,
+  getLandmarkThemes,
+} from "../../util";
 
 const Filter = ({
+  activeView,
   suburb,
   estab,
   landmarkType,
+  bathroomType,
   setSuburb,
   setSeatingType,
   setEstabType,
   setLandmarkType,
+  setBathroomType,
+  setActiveView,
 }) => {
-  const [showEstabFilter, setShowEstabFilter] = useState(false);
-
   // Handle Suburb Change
   const handleSuburbChange = (e) => {
     setSuburb(e.value);
@@ -47,6 +53,10 @@ const Filter = ({
     setLandmarkType(value);
   };
 
+  const handleBathroomChange = (value) => {
+    setBathroomType(value);
+  };
+
 
   const generateSelectOptions = (originalArray) => {
     const optionsArray = originalArray.map(arrayValue => (
@@ -64,33 +74,28 @@ const Filter = ({
     return optionsArray;
   }
 
-  return (
-    <Box 
-      w="sm"
-      borderWidth="2px"
-      borderRadius="md"
-      bg="white"
-      p={6}
-      className="filter-container"
-    >
-      <VStack spacing="16px" align="flex-start">
-        <Heading size="md">Filter Points of Interest</Heading>
-
-        <FormControl as="fieldset">
-          <FormLabel as="legend">I'm looking for:</FormLabel>
-          <RadioGroup 
-            defaultValue="attractions"
-            name="filter-type"
-            onChange={value => setShowEstabFilter(value === "establishments")}
-          >
-            <Stack direction="row">
-              <Radio value="attractions">Landmarks</Radio>
-              <Radio value="establishments">Food/Drinks</Radio>
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        
-        {showEstabFilter ? (
+  const renderFilterView = viewName => {
+    switch (viewName) {
+      case 'landmarks':
+        return (
+          <>
+            <FormControl as="fieldset">
+              <FormLabel as="legend">Choose a type of landmark</FormLabel>
+              <CheckboxGroup 
+                defaultValue={landmarkType}
+                onChange={handleLandmarkChange}
+              >
+                <Stack>
+                  {getLandmarkThemes().map(theme => (
+                    <Checkbox value={theme}>{theme}</Checkbox>
+                  ))}
+                </Stack>
+              </CheckboxGroup>
+            </FormControl>
+          </>
+        )
+      case 'establishments':
+        return (
           <>
             <FormControl as="fieldset">
               <FormLabel as="legend">Do you need outdoor seating?</FormLabel>
@@ -129,23 +134,62 @@ const Filter = ({
               </CheckboxGroup>
             </FormControl>
           </>
-        ) : (
+        )
+      case 'bathrooms':
+        return (
           <>
             <FormControl as="fieldset">
-              <FormLabel as="legend">Choose a type of landmark</FormLabel>
+              <FormLabel as="legend">What type of bathroom do you need?</FormLabel>
               <CheckboxGroup 
-                defaultValue={landmarkType}
-                onChange={handleLandmarkChange}
+                defaultValue={bathroomType}
+                onChange={handleBathroomChange}
               >
                 <Stack>
-                  {getLandmarkThemes().map(theme => (
-                    <Checkbox value={theme}>{theme}</Checkbox>
-                  ))}
+                  <Checkbox value="male">Male</Checkbox>
+                  <Checkbox value="female">Female</Checkbox>
+                  <Checkbox value="baby_facil">Has baby facilities</Checkbox>
+                  <Checkbox value="wheelchair">Wheelchair Accessible</Checkbox>
                 </Stack>
               </CheckboxGroup>
             </FormControl>
           </>
-        )}
+        )
+      default: 
+        return (
+          <p>Please select an option.</p>
+        )
+    }
+  }
+
+  return (
+    <Box 
+      w="sm"
+      borderWidth="2px"
+      borderRadius="md"
+      bg="white"
+      p={6}
+      className="filter-container"
+    >
+      <VStack spacing="16px" align="flex-start">
+        <Heading size="md">Filter Points of Interest</Heading>
+
+        <FormControl as="fieldset">
+          <FormLabel as="legend">I'm looking for:</FormLabel>
+          <RadioGroup 
+            name="filter-type"
+            onChange={value => {
+              setActiveView(value);
+            }}
+          >
+            <Stack direction="row"> 
+              <Radio value="bathrooms">Bathrooms</Radio>
+              <Radio value="landmarks">Landmarks</Radio>
+              <Radio value="establishments">Food/Drinks</Radio>
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        
+        {renderFilterView(activeView)}
       </VStack>
     </Box>
   );

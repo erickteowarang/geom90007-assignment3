@@ -14,12 +14,14 @@ import {
 
 const App = () => {
   const [suburb, setSuburb] = useState("Melbourne (CBD)");
+  const [activeView, setActiveView] = useState(null);
   const [seatingType, setSeatingType] = useState(true);
   const [estabType, setEstabType] = useState(getEstablishments());
-  const [bathroomData, setBathroomData] = useState(initialiseBathroomData());
   const [filteredData, setFilteredData] = useState(initialisePlacesData());
   const [landmarkData, setLandmarkData] = useState(initialiseLandmarkData());
   const [landmarkType, setLandmarkType] = useState(getLandmarkThemes());
+  const [bathroomData, setBathroomData] = useState(initialiseBathroomData());
+  const [bathroomType, setBathroomType] = useState([]);
 
   // Businesses filter logic
   useEffect(() => {
@@ -41,22 +43,41 @@ const App = () => {
       setLandmarkData(filteredLandmarkData);
   }, [landmarkType]);
 
+  // Bathroom filter logic
+  useEffect(() => {
+    let filteredBathroomData = initialiseBathroomData();
+    console.log("before filter", filteredBathroomData);
+    bathroomType.forEach(type => {
+      filteredBathroomData = filteredBathroomData.filter(
+        bathroom => bathroom[type] === "yes"
+      )
+    });
+    console.log("after filter", filteredBathroomData);
+
+    setBathroomData(filteredBathroomData);
+}, [bathroomType]);
+
   return (
     <ChakraProvider>
       <Filter
+        activeView={activeView}
         suburb={suburb}
         estab={estabType}
         landmarkType={landmarkType}
         seatingType={seatingType}
+        bathroomType={bathroomType}
         setSuburb={setSuburb}
         setSeatingType={setSeatingType}
         setEstabType={setEstabType}
         setLandmarkType={setLandmarkType}
+        setBathroomType={setBathroomType}
+        setActiveView={setActiveView}
       />
       <Map
         bathroomData={bathroomData}
         filteredData={filteredData}
         landmarkData={landmarkData}
+        activeView={activeView}
       />
     </ChakraProvider>
   );

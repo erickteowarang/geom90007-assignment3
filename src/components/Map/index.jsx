@@ -9,9 +9,9 @@ import Popup from '../Popup';
 import { getAddressFromGeocode } from "../../util";
 import "./Map.css";
 
-const Map = ({ bathroomData, filteredData, landmarkData }) => {
+const Map = ({ bathroomData, filteredData, landmarkData, activeView }) => {
   const [selectedBathroom, setSelectedBathroom] = useState(null);
-  const [selectedCafe, setSelectedCafe] = useState(null);
+  const [selectedEstab, setSelectedEstab] = useState(null);
   const [selectedLandmark, setSelectedLandmark] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isPopupLoading, setIsPopupLoading] = useState(false);
@@ -28,7 +28,7 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
     setIsPopupLoading(true);
     setSelectedBathroom(null);
     setSelectedLandmark(null);
-    setSelectedCafe({
+    setSelectedEstab({
       latitude: cluster.geometry.coordinates[1],
       longitude: cluster.geometry.coordinates[0],
     });
@@ -62,7 +62,7 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
               hasOutdoorSeating: cluster.properties.hasOutdoorSeating ? 'Yes' : 'No',
             }
             
-            setSelectedCafe(cafeDetails);
+            setSelectedEstab(cafeDetails);
             setIsPopupLoading(false);
           }
         });
@@ -73,7 +73,7 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
   const getLandmarkDetails = async landmark => {
     setIsPopupLoading(true);
     setSelectedBathroom(null);
-    setSelectedCafe(null);
+    setSelectedEstab(null);
     setSelectedLandmark({
       latitude: landmark.latitude,
       longitude: landmark.longitude,
@@ -95,7 +95,7 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
   useEffect(() => {
     const listener = (e) => {
       if (e.key === "Escape") {
-        setSelectedCafe(null);
+        setSelectedEstab(null);
       }
     };
     window.addEventListener("keydown", listener);
@@ -106,6 +106,12 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
       window.removeEventListener("keydown", listener);
     };
   }, []);
+
+  useEffect(() => {
+    switch(activeView) {
+
+    }
+  }, [activeView])
 
   // Map Reference
   const mapRef = useRef();
@@ -123,6 +129,172 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
     options: { radius: 100, maxZoom: 20 },
   });
 
+  const renderView = activeView => {
+    switch (activeView) {
+      case "bathrooms":
+        return (
+          <>
+            {bathroomData.map(bathroom => (
+              <Marker key={bathroom.name} latitude={bathroom.latitude} longitude={bathroom.longitude}>
+                <button 
+                  className="marker-button bathroom-button"
+                  onClick={e => {
+                    e.preventDefault();
+                    setSelectedEstab(null);
+                    setSelectedLandmark(null);
+                    setSelectedBathroom(bathroom);
+                  }}
+                >
+                </button>
+              </Marker>
+            ))}
+            {selectedBathroom && (
+              <Popup 
+                latitude={selectedBathroom.latitude} 
+                longitude = {selectedBathroom.longitude}
+                onClose={() => {
+                  setSelectedBathroom(null);
+                }}
+                isLoading={isPopupLoading}
+                heading={selectedBathroom.name}
+                content={(
+                  <>
+                    <Text fontSize="md"><strong>Has Male Toilets:</strong> {upperFirst(selectedBathroom.male)}</Text>
+                    <Text fontSize="md"><strong>Has Female Toilets:</strong> {upperFirst(selectedBathroom.female)}</Text>
+                    <Text fontSize="md"><strong>Wheelchair Accessible:</strong> {upperFirst(selectedBathroom.wheelchair)}</Text>
+                    <Text fontSize="md"><strong>Has Baby Facilities:</strong> {upperFirst(selectedBathroom.baby_facil)}</Text>
+                  </>
+                )}
+              />
+            )}
+          </>
+        );
+      case "establishments":
+        return (
+          <>
+            {clusters.map((cluster) => {
+              const [longitude, latitude] = cluster.geometry.coordinates;
+              const { cluster: isCluster, point_count: pointCount } =
+                cluster.properties;
+
+              if (isCluster) {
+                return (
+                  <Marker 
+                    key={cluster.id}
+                    latitude={latitude}
+                    longitude={longitude}
+                  >
+                    <div
+                      className="cluster-marker"
+                      style={{
+                        width: `${25 + (pointCount / filteredData.length) * 180}px`,
+                        height: `${25 + (pointCount / filteredData.length) * 180}px`
+                      }}
+                      onClick={() => {
+                        const expansionZoom = Math.min(
+                          supercluster.getClusterExpansionZoom(cluster.id),
+                          20
+                        );
+                        setViewport({
+                          ...viewport,
+                          latitude,
+                          longitude,
+                          zoom: expansionZoom,
+                          transitionInterpolator: new FlyToInterpolator({
+                            speed: 2,
+                          }),
+                          transitionDuration: "auto",
+                        });
+                      }}
+                    >
+                      {pointCount}
+                    </div>
+                  </Marker>
+                );
+              }
+
+              return (
+                <Marker
+                  key={cluster.properties.ID}
+                  latitude={latitude}
+                  longitude={longitude}
+                >
+                  <button
+                    className="marker-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      getCafeDetails(cluster);
+                    }}
+                  ></button>
+                </Marker>
+              );
+            })}
+
+            {selectedEstab && (
+              <Popup
+                latitude={selectedEstab.latitude}
+                longitude={selectedEstab.longitude}
+                onClose={() => {
+                  setSelectedEstab(null);
+                }}
+                isLoading={isPopupLoading}
+                heading={selectedEstab.name}
+                content={(
+                  <>
+                    <Text fontSize="md"><strong>Address:</strong> {selectedEstab.address}</Text>
+                    <Text fontSize="md"><strong>Rating:</strong> {selectedEstab.rating}/5</Text>
+                    <Text fontSize="md">
+                      <strong>Currently Open:</strong>{" "}
+                      {selectedEstab.opening_hours &&
+                      selectedEstab.opening_hours.open_now
+                        ? "Yes"
+                        : "No"}
+                    </Text>
+                    <Text fontSize="md"><strong>Has outdoor seating:</strong> {selectedEstab.hasOutdoorSeating}</Text>
+                  </>
+                )}
+              />
+            )}
+          </>
+        );
+      case "landmarks":
+        return (
+          <>
+            {landmarkData.map(landmark => (
+              <Marker key={landmark["Feature Name"]} latitude={landmark.latitude} longitude={landmark.longitude}>
+                <button 
+                  className="marker-button landmark-button"
+                  onClick={e => {
+                    e.preventDefault();
+                    getLandmarkDetails(landmark);
+                  }}
+                >
+                </button>
+              </Marker>
+            ))}
+            {selectedLandmark && (
+              <Popup 
+                latitude={selectedLandmark.latitude} 
+                longitude = {selectedLandmark.longitude}
+                onClose={() => {
+                  setSelectedLandmark(null);
+                }}
+                isLoading={isPopupLoading}
+                heading={selectedLandmark["Feature Name"]}
+                content={(
+                  <>
+                    <Text fontSize="md"><strong>Address:</strong> {selectedLandmark.address}</Text>
+                    <Text fontSize="md"><strong>Landmark Type:</strong> {selectedLandmark.Theme} - {selectedLandmark["Sub Theme"]}</Text>
+                  </>
+                )}
+              />
+            )}
+          </>
+        );
+      default: 
+        return null;
+    }
+  }
   return isLoading ? (
     <Loader loading={isLoading} />
   ) : (
@@ -135,151 +307,7 @@ const Map = ({ bathroomData, filteredData, landmarkData }) => {
       mapStyle="mapbox://styles/sandonl/cku84fkct0b3w18pdckgthaua/draft"
       ref={mapRef}
     >
-      {landmarkData.map(landmark => (
-        <Marker key={landmark["Feature Name"]} latitude={landmark.latitude} longitude={landmark.longitude}>
-          <button 
-            className="marker-button landmark-button"
-            onClick={e => {
-              e.preventDefault();
-              getLandmarkDetails(landmark);
-            }}
-          >
-          </button>
-        </Marker>
-      ))}
-      {selectedLandmark && (
-        <Popup 
-          latitude={selectedLandmark.latitude} 
-          longitude = {selectedLandmark.longitude}
-          onClose={() => {
-            setSelectedLandmark(null);
-          }}
-          isLoading={isPopupLoading}
-          heading={selectedLandmark["Feature Name"]}
-          content={(
-            <>
-              <Text fontSize="md"><strong>Address:</strong> {selectedLandmark.address}</Text>
-              <Text fontSize="md"><strong>Landmark Type:</strong> {selectedLandmark.Theme} - {selectedLandmark["Sub Theme"]}</Text>
-            </>
-          )}
-        />
-      )}
-
-      {bathroomData.map(bathroom => (
-        <Marker key={bathroom.name} latitude={bathroom.latitude} longitude={bathroom.longitude}>
-          <button 
-            className="marker-button bathroom-button"
-            onClick={e => {
-              e.preventDefault();
-              setSelectedCafe(null);
-              setSelectedLandmark(null);
-              setSelectedBathroom(bathroom);
-            }}
-          >
-          </button>
-        </Marker>
-      ))}
-      {selectedBathroom && (
-        <Popup 
-          latitude={selectedBathroom.latitude} 
-          longitude = {selectedBathroom.longitude}
-          onClose={() => {
-            setSelectedBathroom(null);
-          }}
-          isLoading={isPopupLoading}
-          heading={selectedBathroom.name}
-          content={(
-            <>
-              <Text fontSize="md"><strong>Wheelchair Accessible:</strong> {upperFirst(selectedBathroom.wheelchair)}</Text>
-              <Text fontSize="md"><strong>Has Baby Facilities:</strong> {upperFirst(selectedBathroom.baby_facil)}</Text>
-            </>
-          )}
-        />
-      )}
-      
-      {clusters.map((cluster) => {
-        const [longitude, latitude] = cluster.geometry.coordinates;
-        const { cluster: isCluster, point_count: pointCount } =
-          cluster.properties;
-
-        if (isCluster) {
-          return (
-            <Marker 
-              key={cluster.id}
-              latitude={latitude}
-              longitude={longitude}
-            >
-              <div
-                className="cluster-marker"
-                style={{
-                  width: `${25 + (pointCount / filteredData.length) * 180}px`,
-                  height: `${25 + (pointCount / filteredData.length) * 180}px`
-                }}
-                onClick={() => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(cluster.id),
-                    20
-                  );
-                  setViewport({
-                    ...viewport,
-                    latitude,
-                    longitude,
-                    zoom: expansionZoom,
-                    transitionInterpolator: new FlyToInterpolator({
-                      speed: 2,
-                    }),
-                    transitionDuration: "auto",
-                  });
-                }}
-              >
-                {pointCount}
-              </div>
-            </Marker>
-          );
-        }
-
-        return (
-          <Marker
-            key={cluster.properties.ID}
-            latitude={latitude}
-            longitude={longitude}
-          >
-            <button
-              className="marker-button"
-              onClick={(e) => {
-                e.preventDefault();
-                getCafeDetails(cluster);
-              }}
-            ></button>
-          </Marker>
-        );
-      })}
-
-      {selectedCafe && (
-        <Popup
-          latitude={selectedCafe.latitude}
-          longitude={selectedCafe.longitude}
-          onClose={() => {
-            setSelectedCafe(null);
-          }}
-          isLoading={isPopupLoading}
-          heading={selectedCafe.name}
-          content={(
-            <>
-              <Text fontSize="md"><strong>Address:</strong> {selectedCafe.address}</Text>
-              <Text fontSize="md"><strong>Rating:</strong> {selectedCafe.rating}/5</Text>
-              <Text fontSize="md">
-                <strong>Currently Open:</strong>{" "}
-                {selectedCafe.opening_hours &&
-                selectedCafe.opening_hours.open_now
-                  ? "Yes"
-                  : "No"}
-              </Text>
-              <Text fontSize="md"><strong>Has outdoor seating:</strong> {selectedCafe.hasOutdoorSeating}</Text>
-            </>
-          )}
-        />
-      )}
+     {renderView(activeView)} 
     </ReactMapGL>
   );
 };

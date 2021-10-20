@@ -41,7 +41,7 @@
       "longitude": 144.93766540530564
     },
     {
-      "name": "Public Toilet - Toilet 6 - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)",
+      "name": "Public Toilet - Toilet 6 - Female - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)",
       "female": "yes",
       "male": "no",
       "wheelchair": "no",
@@ -131,7 +131,7 @@
       "longitude": 144.94168216712015
     },
     {
-      "name": "Public Toilet - Toilet 6 - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)",
+      "name": "Public Toilet - Toilet 6 - Male - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)",
       "female": "no",
       "male": "yes",
       "wheelchair": "no",
@@ -141,7 +141,7 @@
       "longitude": 144.96292272645067
     },
     {
-      "name": "Public Toilet - Toilet 1 - longitudesdale Street (Opposite 581 longitudesdale Street)",
+      "name": "Public Toilet - Toilet 1 - Lonsdale Street (Opposite 581 Lonsdale Street)",
       "female": "yes",
       "male": "yes",
       "wheelchair": "yes",
@@ -261,7 +261,7 @@
       "longitude": 144.92110584392117
     },
     {
-      "name": "Public Toilet - Toilet 36 - longitudesdale Street (Opposite 424 longitudesdale Street)",
+      "name": "Public Toilet - Toilet 36 - Lonsdale Street (Opposite 424 Lonsdale Street)",
       "female": "yes",
       "male": "yes",
       "wheelchair": "yes",
@@ -361,7 +361,7 @@
       "longitude": 144.94366905096865
     },
     {
-      "name": "Public Toilet - Toilet 11 - longitudesdale Street (Opposite 88 longitudesdale Street)",
+      "name": "Public Toilet - Toilet 11 - Lonsdale Street (Opposite 88 Lonsdale Street)",
       "female": "yes",
       "male": "yes",
       "wheelchair": "yes",
