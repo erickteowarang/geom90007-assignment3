@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Heading, VStack } from "@chakra-ui/react";
+import { Box, Heading, Link, VStack } from "@chakra-ui/react";
 import { Popup } from "react-map-gl";
 import BeatLoader from "react-spinners/BeatLoader";
+import { getDirectionsLink } from "../../util";
 
 const PopupComponent = ({
   isLoading,
@@ -30,6 +31,9 @@ const PopupComponent = ({
             {heading}
           </Heading>
           {content}
+          <Link href={getDirectionsLink(latitude, longitude)} isExternal color="teal.400">
+            <strong>Get directions</strong>
+          </Link>
         </VStack>
       )}
     </Box>

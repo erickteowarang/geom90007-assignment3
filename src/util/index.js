@@ -85,3 +85,5 @@ export const getAddressFromGeocode = geocode => {
 }
 
 export const initialiseBathroomData = () => bathrooms.features;
+
+export const getDirectionsLink = (lat, lng) => `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
