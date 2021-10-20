@@ -57,6 +57,14 @@ const Filter = ({
     setBathroomType(value);
   };
 
+  // If someone switches the views, reset everything back to the way it was
+  const resetViews = () => {
+    setLandmarkType(getLandmarkThemes());
+    setBathroomType([]);
+    setEstabType(getEstablishments());
+    setSuburb("All");
+  }
+
 
   const generateSelectOptions = (originalArray) => {
     const optionsArray = originalArray.map(arrayValue => (
@@ -179,6 +187,7 @@ const Filter = ({
             name="filter-type"
             onChange={value => {
               setActiveView(value);
+              resetViews();
             }}
           >
             <Stack direction="row"> 
