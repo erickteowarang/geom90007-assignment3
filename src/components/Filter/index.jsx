@@ -170,7 +170,7 @@ const Filter = ({
       className="filter-container"
     >
       <VStack spacing="16px" align="flex-start">
-        <Heading size="md">Find Your Destination</Heading>
+        <Heading size="md">Melbourne City Location Finder</Heading>
 
         <FormControl as="fieldset">
           <FormLabel as="legend">I'm looking for:</FormLabel>
