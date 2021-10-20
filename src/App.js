@@ -13,7 +13,7 @@ import {
 } from "./util";
 
 const App = () => {
-  const [suburb, setSuburb] = useState("Melbourne (CBD)");
+  const [suburb, setSuburb] = useState("All");
   const [activeView, setActiveView] = useState(null);
   const [seatingType, setSeatingType] = useState(true);
   const [estabType, setEstabType] = useState(getEstablishments());
@@ -46,16 +46,22 @@ const App = () => {
   // Bathroom filter logic
   useEffect(() => {
     let filteredBathroomData = initialiseBathroomData();
-    console.log("before filter", filteredBathroomData);
     bathroomType.forEach(type => {
       filteredBathroomData = filteredBathroomData.filter(
         bathroom => bathroom[type] === "yes"
       )
     });
-    console.log("after filter", filteredBathroomData);
 
     setBathroomData(filteredBathroomData);
-}, [bathroomType]);
+  }, [bathroomType]);
+
+  // Reset options when users change the view
+  useEffect(() => {
+    setLandmarkType(getLandmarkThemes());
+    setBathroomType([]);
+    setEstabType(getEstablishments());
+    setSuburb("All");
+  }, [activeView]);
 
   return (
     <ChakraProvider>

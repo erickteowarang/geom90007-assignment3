@@ -31,7 +31,7 @@ const Filter = ({
   setEstabType,
   setLandmarkType,
   setBathroomType,
-  setActiveView,
+  setActiveView
 }) => {
   // Handle Suburb Change
   const handleSuburbChange = (e) => {
@@ -57,15 +57,6 @@ const Filter = ({
     setBathroomType(value);
   };
 
-  // If someone switches the views, reset everything back to the way it was
-  const resetViews = () => {
-    setLandmarkType(getLandmarkThemes());
-    setBathroomType([]);
-    setEstabType(getEstablishments());
-    setSuburb("All");
-  }
-
-
   const generateSelectOptions = (originalArray) => {
     const optionsArray = originalArray.map(arrayValue => (
       {
@@ -90,7 +81,7 @@ const Filter = ({
             <FormControl as="fieldset">
               <FormLabel as="legend">Choose a type of landmark</FormLabel>
               <CheckboxGroup 
-                defaultValue={landmarkType}
+                value={landmarkType}
                 onChange={handleLandmarkChange}
               >
                 <Stack>
@@ -131,7 +122,7 @@ const Filter = ({
             <FormControl as="fieldset">
               <FormLabel as="legend">Choose an establishment type</FormLabel>
               <CheckboxGroup 
-                defaultValue={estab}
+                value={estab}
                 onChange={handleEstabChange}
               >
                 <Stack>
@@ -149,7 +140,7 @@ const Filter = ({
             <FormControl as="fieldset">
               <FormLabel as="legend">What type of bathroom do you need?</FormLabel>
               <CheckboxGroup 
-                defaultValue={bathroomType}
+                value={bathroomType}
                 onChange={handleBathroomChange}
               >
                 <Stack>
@@ -179,16 +170,13 @@ const Filter = ({
       className="filter-container"
     >
       <VStack spacing="16px" align="flex-start">
-        <Heading size="md">Filter Points of Interest</Heading>
+        <Heading size="md">Find Your Destination</Heading>
 
         <FormControl as="fieldset">
           <FormLabel as="legend">I'm looking for:</FormLabel>
           <RadioGroup 
             name="filter-type"
-            onChange={value => {
-              setActiveView(value);
-              resetViews();
-            }}
+            onChange={value => setActiveView(value)}
           >
             <Stack direction="row"> 
               <Radio value="bathrooms">Bathrooms</Radio>
